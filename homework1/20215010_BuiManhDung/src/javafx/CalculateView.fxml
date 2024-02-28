@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="577.0" prefWidth="728.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.CalculatorController">
+  <children>
+    <Button layoutX="0.0" layoutY="330.0" mnemonicParsing="false" onAction="#addAction" prefHeight="80.0" prefWidth="357.0" text="+">
+      <font>
+        <Font size="30.0" fx:id="x1" />
+      </font>
+    </Button>
+    <Button font="$x1" layoutX="354.0" layoutY="330.0" mnemonicParsing="false" onAction="#subAction" prefHeight="80.0" prefWidth="375.0" text="-" />
+    <Button font="$x1" layoutX="0.0" layoutY="410.0" mnemonicParsing="false" onAction="#mulAction" prefHeight="80.0" prefWidth="357.0" text="*" />
+    <Button font="$x1" layoutX="353.0" layoutY="410.0" mnemonicParsing="false" onAction="#divAction" prefHeight="80.0" prefWidth="375.0" text="/" />
+    <Button font="$x1" layoutX="-1.0" layoutY="491.0" mnemonicParsing="false" onAction="#perAction" prefHeight="87.0" prefWidth="357.0000915527344" text="\%" />
+    <Button font="$x1" layoutX="354.0" layoutY="491.0" mnemonicParsing="false" onAction="#clearAction" prefHeight="87.0" prefWidth="374.0" text="clear" />
+    <TextField fx:id="firstNum" layoutX="448.0" layoutY="58.0" prefWidth="200.0" />
+    <TextField fx:id="secondNum" layoutX="448.0" layoutY="117.0" prefWidth="200.0" />
+    <Label layoutX="129.0" layoutY="71.0" text="First Number" />
+    <Label layoutX="129.0" layoutY="123.0" text="Second Number" />
+    <Label layoutX="132.0" layoutY="185.0" text="Result" />
+    <TextField fx:id="result" layoutX="448.0" layoutY="179.0" prefWidth="200.0" />
+  </children>
+</AnchorPane>
