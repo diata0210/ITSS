@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="397.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.CalculatorController">
+  <children>
+    <Button layoutX="0.0" layoutY="330.0" mnemonicParsing="false" onAction="#addAction" prefHeight="36.0" prefWidth="178.0" text="+">
+      <font>
+        <Font size="30.0" fx:id="x1" />
+      </font>
+    </Button>
+    <Button font="$x1" layoutX="200.0" layoutY="330.0" mnemonicParsing="false" onAction="#subAction" prefHeight="57.0" prefWidth="190.0" text="-" />
+    <Button font="$x1" layoutY="399.0" mnemonicParsing="false" onAction="#mulAction" prefHeight="35.0" prefWidth="178.0" text="*" />
+    <Button font="$x1" layoutX="200.0" layoutY="393.0" mnemonicParsing="false" onAction="#divAction" prefHeight="57.0" prefWidth="190.0" text="/" />
+    <Button font="$x1" layoutY="469.0" mnemonicParsing="false" onAction="#modAction" prefHeight="57.0" prefWidth="178.0" text="\%" />
+    <Button font="$x1" layoutX="200.0" layoutY="469.0" mnemonicParsing="false" onAction="#clearAction" prefHeight="51.0" prefWidth="190.0" text="clear" />
+    <TextField fx:id="firstNum" layoutX="246.0" layoutY="116.0" prefHeight="42.0" prefWidth="133.0" />
+    <TextField fx:id="secondNum" layoutX="246.0" layoutY="172.0" prefHeight="42.0" prefWidth="133.0" />
+    <Label layoutX="20.0" layoutY="109.0" prefHeight="57.0" prefWidth="190.0" text="First Number">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
+    <Label layoutX="20.0" layoutY="172.0" prefHeight="42.0" prefWidth="215.0" text="Second Number">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
+    <Label layoutX="20.0" layoutY="233.0" prefHeight="42.0" prefWidth="124.0" text="Result">
+         <font>
+            <Font size="30.0" />
+         </font></Label>
+    <TextField fx:id="result" layoutX="246.0" layoutY="227.0" prefHeight="42.0" prefWidth="133.0" />
+  </children>
+</AnchorPane>
