@@ -1,6 +1,8 @@
 package javafx;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +15,8 @@ public class Calculator extends Application {
   @Override
   public void start(Stage primaryStage) {
     try {
-      Parent root = FXMLLoader.load(getClass().getResource("/CalculateView.fxml"));
+      URL url = new File("/java/homework1/dang-thai-tuan-210907/src/javafx/CalculateView.fxml").toURI().toURL();
+      Parent root = FXMLLoader.load(url);
       primaryStage.setTitle("Calculator");
       primaryStage.setScene(new Scene(root, 1600, 800));
       primaryStage.show();

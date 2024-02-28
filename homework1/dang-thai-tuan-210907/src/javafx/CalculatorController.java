@@ -1,18 +1,24 @@
 package javafx;
 
-import java.awt.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 
 public class CalculatorController {
 
 	@FXML
 	private javafx.scene.layout.AnchorPane AnchorPane;
+	
+	@FXML
 	private TextField firstNum;
+	@FXML
+
 	private TextField secondNum;
+	@FXML
+
 	private TextField result;
 
 	@FXML
