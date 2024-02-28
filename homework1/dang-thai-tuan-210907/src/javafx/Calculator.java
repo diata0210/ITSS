@@ -18,7 +18,7 @@ public class Calculator extends Application {
       URL url = new File("/java/homework1/dang-thai-tuan-210907/src/javafx/CalculateView.fxml").toURI().toURL();
       Parent root = FXMLLoader.load(url);
       primaryStage.setTitle("Calculator");
-      primaryStage.setScene(new Scene(root, 1600, 800));
+      primaryStage.setScene(new Scene(root));
       primaryStage.show();
     } catch (IOException e) {
       e.printStackTrace();
