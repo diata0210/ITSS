@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS SiteOrder (
 
 CREATE TABLE IF NOT EXISTS SiteOrderDetail (
   ID INT AUTO_INCREMENT PRIMARY KEY,
+  
   productID INT,
   quantity INT,
   FOREIGN KEY (productID) REFERENCES Products(ID),
