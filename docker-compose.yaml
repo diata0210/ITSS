@@ -12,7 +12,12 @@ services:
     volumes:
       - db_data:/var/lib/mysql # Volume cho dữ liệu MySQL
       - ./sql_dump:/docker-entrypoint-initdb.d/ # Thư mục chứa các script SQL để import
-  server:
+  app:
+    build: ./project
+    depends_on:
+      - mysql
+    environment:
+      - DATABASE_URL=mysql://root:@db:3306/sale_db
   
 volumes:
   db_data:
