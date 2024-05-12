@@ -57,11 +57,13 @@ CREATE TABLE IF NOT EXISTS SiteOrderDetail (
   FOREIGN KEY (productID) REFERENCES Products(ID),
 )
 
+
+
 CREATE TABLE IF NOT EXISTS Users (
   username VARCHAR(255),
   upassword VARCHAR(255),
   ID INT,
-  rname VARCHAR(255),
+  roles INT,
 )
 
 CREATE TABLE IF NOT EXISTS Vehicles(

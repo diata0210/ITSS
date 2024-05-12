@@ -23,4 +23,4 @@ mysql -h "$DB_HOST" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" < "$SQL_FILE"
 
 echo "Starting server"
 
-javac #write me the path to the class that contain main function
+mvn exec:java
