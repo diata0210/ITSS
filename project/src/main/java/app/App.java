@@ -2,12 +2,16 @@ package app;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import view.Login;
+
+import java.util.Objects;
+
 public final class App extends Application{
     @Override
     public void start(Stage stage) throws Exception {
-        Login login = new Login();
-        login.start(stage);
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Login.fxml")));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static void main (String []args){
