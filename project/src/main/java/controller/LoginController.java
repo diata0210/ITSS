@@ -24,7 +24,6 @@ public class LoginController {
     void clickedForgotPassword(MouseEvent event) {
 
     }
-
     private AnchorPane anchorPane;
     @FXML
     void onLogin(ActionEvent event) {
@@ -40,4 +39,5 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+
 }
