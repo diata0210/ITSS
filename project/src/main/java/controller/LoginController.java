@@ -1,6 +1,7 @@
-package app;
+package controller;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 public class LoginController {
 
@@ -23,12 +25,13 @@ public class LoginController {
 
     }
 
+    private AnchorPane anchorPane;
     @FXML
-    void clickedLogin(ActionEvent event) {
+    void onLogin(ActionEvent event) {
         Stage loginStage = (Stage) usernameField.getScene().getWindow();
         loginStage.close();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomePage.fxml"));
             Parent root = loader.load();
             Stage homeStage = new Stage();
             homeStage.setScene(new Scene(root));
@@ -37,5 +40,4 @@ public class LoginController {
             e.printStackTrace();
         }
     }
-
 }

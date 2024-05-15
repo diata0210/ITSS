@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -29,15 +30,23 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="62.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tuấn Đặng">
+                  <Text fill="WHITE" layoutX="81.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tuấn Đặng">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Text>
                   <Text fill="WHITE" layoutX="31.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-width: 0 0 3px;" text="Bộ phận đặt hàng quốc tế" />
+                  <FontAwesomeIconView fill="RED" glyphName="USER" layoutX="51.0" layoutY="37.0" size="20" text="" wrappingWidth="30.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </FontAwesomeIconView>
                </children>
             </Pane>
             <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="51.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-cursor: pointer;" text="Trang chủ" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView accessibleRole="BUTTON" fill="#e5fab1" glyphName="STAR" selectionFill="#d92b2b" size="20" text="" />
+               </graphic>
                <font>
                   <Font size="14.0" />
                </font>
@@ -49,6 +58,9 @@
                </padding>
             </Button>
             <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="51.0" prefWidth="215.0" style="-fx-background-color: transparent; -fx-cursor: pointer;" text="Đơn hàng đặt đến Site" textFill="#00ff11">
+               <graphic>
+                  <FontAwesomeIconView fill="#e5fab1" glyphName="SHOP" selectionFill="#d92b2b" size="20" text="" />
+               </graphic>
                <font>
                   <Font size="14.0" />
                </font>
@@ -57,6 +69,9 @@
                </padding>
             </Button>
             <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" minHeight="-Infinity" mnemonicParsing="false" prefHeight="58.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-cursor: pointer;" text="Đơn hàng yêu cầu" textFill="WHITE">
+               <graphic>
+                  <FontAwesomeIconView fill="#e5fab1" glyphName="CART" selectionFill="#d92b2b" size="20" text="" />
+               </graphic>
                <font>
                   <Font size="14.0" />
                </font>
@@ -68,6 +83,9 @@
                <font>
                   <Font size="14.0" />
                </font>
+               <graphic>
+                  <FontAwesomeIconView fill="#e5fab1" glyphName="CART" selectionFill="#d92b2b" size="20" text="" />
+               </graphic>
                <padding>
                   <Insets left="20.0" />
                </padding>
@@ -108,6 +126,11 @@
                <children>
                   <TextField prefHeight="42.0" prefWidth="307.0" promptText="Lọc theo tên Site ..." />
                   <ComboBox prefHeight="42.0" prefWidth="266.0" promptText="Lọc theo trạng thái" />
+                  <FontAwesomeIconView glyphName="SEARCH" size="20" wrappingWidth="18.571428298950195">
+                     <HBox.margin>
+                        <Insets top="10.0" />
+                     </HBox.margin>
+                  </FontAwesomeIconView>
                </children>
                <cursor>
                   <Cursor fx:constant="DEFAULT" />
@@ -130,7 +153,12 @@
             </Label>
             <Pane accessibleRole="BUTTON" layoutX="485.0" layoutY="29.0" prefHeight="35.0" prefWidth="152.0" style="-fx-background-color: rgb(153, 51, 255);">
                <children>
-                  <Text fill="WHITE" layoutX="27.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thêm đơn hàng">
+                  <FontAwesomeIconView fill="RED" glyphName="PLUS" layoutX="14.0" layoutY="26.0" selectionStart="10" size="20" strokeWidth="0.0" tabSize="0" text="" viewOrder="3.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </FontAwesomeIconView>
+                  <Text fill="WHITE" layoutX="39.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Thêm đơn hàng">
                      <font>
                         <Font size="14.0" />
                      </font>
