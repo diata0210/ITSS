@@ -1,4 +1,4 @@
-package models;
+package app.model;
 
 public class SiteOrder {
     private int id;
@@ -13,7 +13,7 @@ public class SiteOrder {
     public int getOrderID() {
         return orderID;
     }
-    public void setOrderID(int orderID) {
+    public void setOrderID(int osrderID) {
         this.orderID = orderID;
     }
     public int getSiteID() {

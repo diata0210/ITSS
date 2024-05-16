@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 
-public class HomePageController {
+public class LayoutController {
 
     @FXML
     private AnchorPane pane;
@@ -31,7 +31,7 @@ public class HomePageController {
 
     @FXML
     void loadSiteOrder(ActionEvent event) {
-        loadScreen("/app/project/DetailOrderPage.fxml");
+        loadScreen("/app/project/OrderToSitePage.fxml");
     }
 
     @FXML
