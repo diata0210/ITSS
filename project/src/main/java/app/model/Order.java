@@ -1,10 +1,12 @@
-package models;
-import java.sql.Date;
+package app.model;
+
+import java.util.Date;
+
 public class Order {
     private int orderID;
     private int finalPrice;
     private String descriptions;
-    private Date arriveDate;
+    private java.util.Date arriveDate;
     public int getOrderID() {
         return orderID;
     }
@@ -23,7 +25,7 @@ public class Order {
     public void setDescriptions(String descriptions) {
         this.descriptions = descriptions;
     }
-    public Date getArriveDate() {
+    public java.util.Date getArriveDate() {
         return arriveDate;
     }
     public void setArriveDate(Date arriveDate) {

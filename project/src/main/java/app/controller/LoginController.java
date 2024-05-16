@@ -31,8 +31,7 @@ public class LoginController {
         Stage loginStage = (Stage) usernameField.getScene().getWindow();
         loginStage.close();
         try {
-            FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("/app/project/HomePage.fxml"));
-
+            FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("/app/project/Layout.fxml"));
             Parent root = loader.load();
             Stage homeStage = new Stage();
             homeStage.setScene(new Scene(root));

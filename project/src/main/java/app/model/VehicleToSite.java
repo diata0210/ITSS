@@ -1,4 +1,4 @@
-package models;
+package app.model;
 
 public class VehicleToSite {
     private int id;
