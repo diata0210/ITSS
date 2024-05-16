@@ -2,7 +2,8 @@ package app;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-
+import javafx.scene.*;
+import javafx.fxml.*;
 import java.util.Objects;
 
 public final class App extends Application{

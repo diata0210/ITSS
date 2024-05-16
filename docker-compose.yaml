@@ -6,7 +6,7 @@ services:
       dockerfile: /project-db-init/Dockerfile
     # image: mysql:8.0 # Bạn có thể thay đổi phiên bản MySQL nếu cần
     environment:
-      - MYSQL_DATABASE=QLPK
+      - MYSQL_DATABASE=sale_db
       - MYSQL_ALLOW_EMPTY_PASSWORD=yes
     #   # MYSQL_USER: root # Tên người dùng
     #   # MYSQL_PASSWORD: 12345 # Mật khẩu của người dùng
