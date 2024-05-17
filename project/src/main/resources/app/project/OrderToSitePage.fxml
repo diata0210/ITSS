@@ -41,8 +41,8 @@
                 </TableView>
                 <HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                     <children>
-                        <TextField onAction="#filterByName" prefHeight="42.0" prefWidth="247.0" promptText="Lọc theo tên Site ..." />
-                        <ComboBox onAction="#filterByStatus" prefHeight="42.0" prefWidth="266.0" promptText="Lọc theo trạng thái" />
+                        <TextField fx:id="filterByName" onAction="#filterByName" prefHeight="42.0" prefWidth="247.0" promptText="Lọc theo tên Site ..." />
+                        <ComboBox fx:id="filterByStatus" onAction="#filterByStatus" prefHeight="42.0" prefWidth="266.0" promptText="Lọc theo trạng thái" />
                   <Button mnemonicParsing="false" onAction="#search" prefHeight="42.0" prefWidth="52.0" text="Search" />
                     </children>
                     <cursor>
