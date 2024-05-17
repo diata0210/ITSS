@@ -28,7 +28,8 @@ CREATE TABLE IF NOT EXISTS Orders (
   finalPrice INT,
   descriptions VARCHAR(1000),
   sendDate DATE,
-  arriveDate DATE
+  arriveDate DATE,
+  ostatus INT
 );
 
 CREATE TABLE IF NOT EXISTS OrderDetails (
@@ -140,37 +141,63 @@ INSERT INTO ProductSites (siteID, productID, quantity) VALUES
 (1, 6, 60), (1, 7, 15), (1, 8, 20), (1, 9, 35), (1, 10, 18),
 (2, 13, 22), (2, 14, 30), (2, 15, 10), (2, 16, 15), (2, 17, 25),
 (2, 18, 18), (2, 19, 40), (2, 20, 12), (2, 21, 35), (2, 22, 28),
-(3, 23, 15), (3, 24, 20), (3, 25, 28), (3, 26, 10), (3, 27, 32),
-(3, 28, 20), (3, 29, 25), (3, 30, 30), (3, 31, 15), (3, 32, 18),
+(3, 23, 15), (3, 21, 20), (3, 20, 28), (3, 19, 10), (3, 18, 32),
+(3, 17, 20), (3, 12, 25), (3, 15, 30), (3, 1, 15), (3, 4, 18),
 (4, 5, 40), (4, 6, 60), (4, 7, 15), (4, 8, 20), (4, 9, 35),
 (4, 10, 18), (4, 11, 28), (4, 12, 45), (4, 13, 22), (4, 14, 30),
 (5, 15, 10), (5, 16, 15), (5, 17, 25), (5, 18, 18), (5, 19, 40),
 (5, 20, 12), (5, 21, 35), (5, 22, 28), (5, 23, 15), (5, 24, 20);
 
-INSERT INTO Orders (finalPrice, descriptions, sendDate, arriveDate)
+INSERT INTO Orders (finalPrice, descriptions, sendDate, arriveDate,ostatus)
 VALUES
-    (2500, 'Đang chờ xử lý', '2024-05-17', '2024-05-30'),
-    (670, 'Đang chờ xử lý', '2024-05-18', '2024-05-25');
+    (0, NULL, '2024-05-10', '2024-05-20', 0),
+    (0, NULL, '2024-05-13', NULL, 1),
+    (0, NULL, '2024-05-16', NULL, 2),
+    (0, NULL, '2024-05-17', NULL, 3),
+    (0, NULL, '2024-05-15', NULL, 4);
 
 INSERT INTO OrderDetails (productID, orderID, quantity)
 VALUES
     (1, 1, 2),
     (2, 1, 3),
-    (8, 1, 1),
-    (3, 1, 2),
+    (8, 1, 7),
+    (3, 1, 8),
     (9, 1, 3),
-    (10, 1, 1),
-    (4, 2, 5),
-    (5, 2, 4),
-    (6, 2, 2),
+    (15, 1, 7),
+    (17, 1, 15),
+    (22, 1, 10),
+    (4, 2, 10),
+    (5, 2, 17),
+    (6, 2, 6),
     (7, 2, 3),
-    (11, 2, 2),
-    (12, 2, 1);
+    (11, 2, 30),
+    (12, 2, 10),
+    (15, 2, 16),
+    (16, 2, 7),
+    (8, 3, 17),
+    (3, 3, 12),
+    (9, 3, 20),
+    (15, 3, 10),
+    (17, 3, 25),
+    (22, 3, 30),
+     (4, 4, 15),
+    (5, 4, 25),
+    (6, 4, 18),
+    (7, 4, 30),
+    (11, 4, 20),
+    (12, 4, 10),
+    (15, 4, 20),
+    (16, 4, 28),
+    (8, 5, 20),
+    (3, 5, 30),
+    (9, 5, 25),
+    (15, 5, 12),
+    (17, 5, 18),
+    (22, 5, 15);
 UPDATE Orders
 SET finalPrice = (
 SELECT SUM(Products.price * OrderDetails.quantity) 
 FROM OrderDetails
 JOIN Products ON OrderDetails.productID = Products.id
 WHERE Orders.id = OrderDetails.orderID
-)
-WHERE Orders.id IN (1, 2);
+);
