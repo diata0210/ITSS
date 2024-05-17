@@ -2,6 +2,7 @@ module app.project {
     requires javafx.controls;
     requires javafx.fxml;
     requires org.reflections;
+    requires java.sql;
 
 
     opens app.controller to javafx.fxml;
