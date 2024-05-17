@@ -5,21 +5,21 @@ CREATE TABLE IF NOT EXISTS Users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(255),
   upassword VARCHAR(255),
-  role INT
+  roles INT
 );
 
 CREATE TABLE IF NOT EXISTS Sites (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30),
-    address VARCHAR(30),
+    sname VARCHAR(30),
+    saddress VARCHAR(30),
     userID INT,
     FOREIGN KEY (userID) REFERENCES Users(id)
 );
 
 CREATE TABLE IF NOT EXISTS Products (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30),
-    type VARCHAR(30),
+    pname VARCHAR(30),
+    ptype VARCHAR(30),
     price INT
 );
 
@@ -40,7 +40,6 @@ CREATE TABLE IF NOT EXISTS OrderDetails (
 );
 
 CREATE TABLE IF NOT EXISTS ProductSites (
-  id INT AUTO_INCREMENT PRIMARY KEY,
   siteID INT,
   productID INT,
   quantity INT,
@@ -77,7 +76,7 @@ CREATE TABLE IF NOT EXISTS VehicleToSites (
   FOREIGN KEY (siteID) REFERENCES Sites(id)
 );
 
-INSERT INTO Users (username, upassword, role) VALUES
+INSERT INTO Users (username, upassword, roles) VALUES
 ('user1', 'password1', 1),
 ('user2', 'password2', 2),
 ('user3', 'password3', 3),
@@ -87,14 +86,14 @@ INSERT INTO Users (username, upassword, role) VALUES
 ('user7', 'password7', 4),
 ('user8', 'password8', 4);
 
-INSERT INTO Sites (name, address, userID) VALUES
+INSERT INTO Sites (sname, saddress, userID) VALUES
 ('Site A', 'Address A', 4),
 ('Site B', 'Address B', 5),
 ('Site C', 'Address C', 6),
 ('Site D', 'Address D', 7),
 ('Site E', 'Address E', 8);
 
-INSERT INTO Products (name, type, price) VALUES
+INSERT INTO Products (pname, ptype, price) VALUES
 ('Laptop', 'Electronics', 1000),
 ('Smartphone', 'Electronics', 800),
 ('Headphones', 'Electronics', 150),
@@ -135,3 +134,43 @@ INSERT INTO VehicleToSites (vehicleID, siteID, dateTrans) VALUES
 (2, 4, 2),
 (1, 5, 8),
 (2, 5, 5);
+
+INSERT INTO ProductSites (siteID, productID, quantity) VALUES
+(1, 1, 20), (1, 2, 30), (1, 3, 50), (1, 4, 25), (1, 5, 40),
+(1, 6, 60), (1, 7, 15), (1, 8, 20), (1, 9, 35), (1, 10, 18),
+(2, 13, 22), (2, 14, 30), (2, 15, 10), (2, 16, 15), (2, 17, 25),
+(2, 18, 18), (2, 19, 40), (2, 20, 12), (2, 21, 35), (2, 22, 28),
+(3, 23, 15), (3, 24, 20), (3, 25, 28), (3, 26, 10), (3, 27, 32),
+(3, 28, 20), (3, 29, 25), (3, 30, 30), (3, 31, 15), (3, 32, 18),
+(4, 5, 40), (4, 6, 60), (4, 7, 15), (4, 8, 20), (4, 9, 35),
+(4, 10, 18), (4, 11, 28), (4, 12, 45), (4, 13, 22), (4, 14, 30),
+(5, 15, 10), (5, 16, 15), (5, 17, 25), (5, 18, 18), (5, 19, 40),
+(5, 20, 12), (5, 21, 35), (5, 22, 28), (5, 23, 15), (5, 24, 20);
+
+INSERT INTO Orders (finalPrice, descriptions, sendDate, arriveDate)
+VALUES
+    (2500, 'Đang chờ xử lý', '2024-05-17', '2024-05-30'),
+    (670, 'Đang chờ xử lý', '2024-05-18', '2024-05-25');
+
+INSERT INTO OrderDetails (productID, orderID, quantity)
+VALUES
+    (1, 1, 2),
+    (2, 1, 3),
+    (8, 1, 1),
+    (3, 1, 2),
+    (9, 1, 3),
+    (10, 1, 1),
+    (4, 2, 5),
+    (5, 2, 4),
+    (6, 2, 2),
+    (7, 2, 3),
+    (11, 2, 2),
+    (12, 2, 1);
+UPDATE Orders
+SET finalPrice = (
+SELECT SUM(Products.price * OrderDetails.quantity) 
+FROM OrderDetails
+JOIN Products ON OrderDetails.productID = Products.id
+WHERE Orders.id = OrderDetails.orderID
+)
+WHERE Orders.id IN (1, 2);
