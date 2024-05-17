@@ -11,3 +11,8 @@ Prerequisite: Docker,docker compose
 please report if some kind of errors appear during it, ill try to fix it next time.
 
 Note that this docker compose currently only use for init a database without needing mysql or xampp install, you have to run the app mannually through vscode extension/eclipse or intelj
+
+
+# TODO
+
+RECHECK THE INITIALIZE QUERY

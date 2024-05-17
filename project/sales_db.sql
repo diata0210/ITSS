@@ -5,21 +5,21 @@ CREATE TABLE IF NOT EXISTS Users (
   id INT AUTO_INCREMENT PRIMARY KEY,
   username VARCHAR(255),
   upassword VARCHAR(255),
-  role INT
+  roles INT
 );
 
 CREATE TABLE IF NOT EXISTS Sites (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30),
-    address VARCHAR(30),
+    sname VARCHAR(30),
+    saddress VARCHAR(30),
     userID INT,
     FOREIGN KEY (userID) REFERENCES Users(id)
 );
 
 CREATE TABLE IF NOT EXISTS Products (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(30),
-    type VARCHAR(30),
+    pname VARCHAR(30),
+    ptype VARCHAR(30),
     price INT
 );
 
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS VehicleToSites (
   FOREIGN KEY (siteID) REFERENCES Sites(id)
 );
 
-INSERT INTO Users (username, upassword, role) VALUES
+INSERT INTO Users (username, upassword, roles) VALUES
 ('user1', 'password1', 1),
 ('user2', 'password2', 2),
 ('user3', 'password3', 3),
@@ -86,14 +86,14 @@ INSERT INTO Users (username, upassword, role) VALUES
 ('user7', 'password7', 4),
 ('user8', 'password8', 4);
 
-INSERT INTO Sites (name, address, userID) VALUES
+INSERT INTO Sites (sname, saddress, userID) VALUES
 ('Site A', 'Address A', 4),
 ('Site B', 'Address B', 5),
 ('Site C', 'Address C', 6),
 ('Site D', 'Address D', 7),
 ('Site E', 'Address E', 8);
 
-INSERT INTO Products (name, type, price) VALUES
+INSERT INTO Products (pname, ptype, price) VALUES
 ('Laptop', 'Electronics', 1000),
 ('Smartphone', 'Electronics', 800),
 ('Headphones', 'Electronics', 150),
