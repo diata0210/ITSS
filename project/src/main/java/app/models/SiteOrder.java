@@ -1,4 +1,4 @@
-package app.model;
+package app.models;
 
 import java.util.List;
 
@@ -7,11 +7,10 @@ public class SiteOrder {
     private int orderID;
     private int siteID;
     private int status;
-    private int final_price;
+    public double finalPrice;
     private List<SiteOrderDetail> siteOrderDetails;
 
     public int getId() {
-
         return id;
     }
     public void setId(int id) {
@@ -29,5 +28,21 @@ public class SiteOrder {
     }
     public void setSiteID(int siteID) {
         this.siteID = siteID;
+    }
+
+    public List<SiteOrderDetail> getSiteOrderDetails() {
+        return siteOrderDetails;
+    }
+
+    public double getFinalPrice() {
+        return finalPrice;
+    }
+
+    public void setFinalPrice(double finalPrice) {
+        this.finalPrice = finalPrice;
+    }
+
+    public void setSiteOrderDetails(List<SiteOrderDetail> siteOrderDetails) {
+        this.siteOrderDetails = siteOrderDetails;
     }
 }

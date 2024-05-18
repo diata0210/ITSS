@@ -1,7 +1,8 @@
-package app.model;
+package app.models;
 
-public class SiteOrderDetail {
+public class ProductSite {
     private int id;
+    private int siteID;
     private int productID;
     private int quantity;
     public int getId() {
@@ -9,6 +10,12 @@ public class SiteOrderDetail {
     }
     public void setId(int id) {
         this.id = id;
+    }
+    public int getSiteID() {
+        return siteID;
+    }
+    public void setSiteID(int siteID) {
+        this.siteID = siteID;
     }
     public int getProductID() {
         return productID;
