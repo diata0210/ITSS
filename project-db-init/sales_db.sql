@@ -96,7 +96,7 @@ INSERT INTO Users (username, upassword, roles) VALUES
 ('AdmBankok', '123456', 3),
 ('AdmQuanCh', '123456', 3),
 ('AdmAnGiang', '123456', 3),
-('AdmHaNoi', '123456', 3),
+('AdmHaNoi', '123456', 3);
 
 
 -- 1: Bộ phận bán hàng
@@ -111,31 +111,31 @@ INSERT INTO Sites (sname, saddress, userID) VALUES
 ('Colosseum', 'Bangkok', 5),
 ('Hanoi', 'Hanoi', 8);
 
-INSERT INTO Products (pname, ptype, price, punit, pcode) VALUES
-('Laptop', 'Electronics', 1000, 'piece', 'LT001'),
-('Smartphone', 'Electronics', 800, 'piece', 'SP001'),
-('Headphones', 'Electronics', 150, 'piece', 'HP001'),
-('T-shirt', 'Clothing', 20, 'piece', 'TS001'),
-('Jeans', 'Clothing', 40, 'piece', 'JN001'),
-('Running Shoes', 'Footwear', 80, 'pair', 'RS001'),
-('Backpack', 'Accessories', 50, 'piece', 'BP001'),
-('Watch', 'Accessories', 200, 'piece', 'WT001'),
-('Sunglasses', 'Accessories', 30, 'piece', 'SG001'),
-('Coffee Maker', 'Appliances', 120, 'piece', 'CM001'),
-('Keyboard', 'Electronics', 50, 'piece', 'KB001'),
-('Mouse', 'Electronics', 30, 'piece', 'MS001'),
-('Monitor', 'Electronics', 300, 'piece', 'MN001'),
-('Desk Lamp', 'Home Accessories', 40, 'piece', 'DL001'),
-('Couch', 'Furniture', 500, 'piece', 'CH001'),
-('Dining Table', 'Furniture', 300, 'piece', 'DT001'),
-('Office Chair', 'Furniture', 200, 'piece', 'OC001'),
-('Running Shorts', 'Clothing', 15, 'piece', 'RS002'),
-('Hiking Boots', 'Footwear', 100, 'pair', 'HB001'),
-('Handbag', 'Accessories', 70, 'piece', 'HB002'),
-('Earbuds', 'Electronics', 80, 'piece', 'EB001'),
-('Smartwatch', 'Electronics', 250, 'piece', 'SW001'),
-('Fitness Tracker', 'Electronics', 120, 'piece', 'FT001'),
-('Blender', 'Appliances', 80, 'piece', 'BL001');
+INSERT INTO Products (pname, price, punit, pcode) VALUES
+('Laptop', 1000, 'piece', 'LT001'),
+('Smartphone', 800, 'piece', 'SP001'),
+('Headphones', 150, 'piece', 'HP001'),
+('T-shirt', 20, 'piece', 'TS001'),
+('Jeans', 40, 'piece', 'JN001'),
+('Running Shoes',  80, 'pair', 'RS001'),
+('Backpack',  50, 'piece', 'BP001'),
+('Watch',  200, 'piece', 'WT001'),
+('Sunglasses',  30, 'piece', 'SG001'),
+('Coffee Maker',  120, 'piece', 'CM001'),
+('Keyboard',  50, 'piece', 'KB001'),
+('Mouse',  30, 'piece', 'MS001'),
+('Monitor',  300, 'piece', 'MN001'),
+('Desk Lamp',  40, 'piece', 'DL001'),
+('Couch', 500, 'piece', 'CH001'),
+('Dining Table', 300, 'piece', 'DT001'),
+('Office Chair',  200, 'piece', 'OC001'),
+('Running Shorts',  15, 'piece', 'RS002'),
+('Hiking Boots', 100, 'pair', 'HB001'),
+('Handbag',  70, 'piece', 'HB002'),
+('Earbuds',  80, 'piece', 'EB001'),
+('Smartwatch',  250, 'piece', 'SW001'),
+('Fitness Tracker',  120, 'piece', 'FT001'),
+('Blender',  80, 'piece', 'BL001');
 
 INSERT INTO Vehicles (vname) VALUES
 ('Ship'),
@@ -249,7 +249,6 @@ VALUES
 -- 4: Đã nhận
 -- 5: Đã hủy
 
-INSERT 
 UPDATE Orders
 SET finalPrice = (
   SELECT SUM(Products.price * OrderDetails.quantity) 
