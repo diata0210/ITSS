@@ -1,8 +1,10 @@
 package app.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import app.models.SiteOrder;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseConnection {
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/sales_db?useSSL=false";
