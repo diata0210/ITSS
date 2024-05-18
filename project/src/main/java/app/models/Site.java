@@ -1,9 +1,8 @@
-package app.model;
-
-public class Product {
+package app.models;
+public class Site {
     private int id;
     private String name;
-    private String type;
+    private String address;
     public int getId() {
         return id;
     }
@@ -16,11 +15,10 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
-    public String getType() {
-        return type;
+    public String getAddress() {
+        return address;
     }
-    public void setType(String type) {
-        this.type = type;
+    public void setAddress(String address) {
+        this.address = address;
     }
- 
 }

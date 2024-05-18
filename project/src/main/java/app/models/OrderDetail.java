@@ -1,27 +1,20 @@
-package app.model;
+package app.models;
 
-public class ProductSite {
-    private int id;
-    private int siteID;
+public class OrderDetail {
     private int productID;
+    private int orderID;
     private int quantity;
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public int getSiteID() {
-        return siteID;
-    }
-    public void setSiteID(int siteID) {
-        this.siteID = siteID;
-    }
     public int getProductID() {
         return productID;
     }
     public void setProductID(int productID) {
         this.productID = productID;
+    }
+    public int getOrderID() {
+        return orderID;
+    }
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
     }
     public int getQuantity() {
         return quantity;
@@ -29,5 +22,4 @@ public class ProductSite {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    
 }

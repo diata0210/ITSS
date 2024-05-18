@@ -1,4 +1,4 @@
-package app.model;
+package app.models;
 
 public class Vehicles {
     private int id;
