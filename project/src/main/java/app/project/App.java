@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.List;
 
 public class App extends Application {
@@ -21,6 +22,9 @@ public class App extends Application {
         Stage homeStage = new Stage();
         homeStage.setScene(new Scene(root));
         homeStage.show();
+
+        Connection connection = DatabaseConnection.getConnection();
+
     }
 
     public static void main(String[] args) {

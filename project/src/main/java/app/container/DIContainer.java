@@ -10,7 +10,7 @@ import java.util.*;
 
 public class DIContainer {
 
-    private final Map<Class<?>, Object> components = new HashMap<>();
+    private static final Map<Class<?>, Object> components = new HashMap<>();
 
     public DIContainer() {
         // scan all classes in the classpath for @Component annotation
@@ -30,7 +30,7 @@ public class DIContainer {
         }
     }
 
-    public <T> T getInstance(Class<T> type) {
+    public static <T> T getInstance(Class<T> type) {
         if (!components.containsKey(type)) {
             throw new RuntimeException("No instance found for type " + type.getName());
         }

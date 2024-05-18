@@ -1,28 +1,22 @@
 package app.models;
 
 public class SiteOrderDetail {
-    private int orderID;
-    private int productID;
+    private String pCode;
     private int quantity;
 
-    public int getOrderID(){
-        return orderID;
+    public String getpCode() {
+        return pCode;
     }
 
-    public void setOrderID(int orderID){
-        this.orderID = orderID;
-    }
-    public int getProductID() {
-        return productID;
-    }
-    public void setProductID(int productID) {
-        this.productID = productID;
-    }
     public int getQuantity() {
         return quantity;
     }
+
+    public void setpCode(String pCode) {
+        this.pCode = pCode;
+    }
+
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    
 }

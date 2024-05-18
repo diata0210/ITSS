@@ -27,7 +27,7 @@
                 <RowConstraints maxHeight="437.6000061035156" minHeight="10.0" prefHeight="359.3999755859375" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <TableView maxHeight="-Infinity" prefHeight="346.0" prefWidth="630.0" GridPane.rowIndex="1">
+                <TableView fx:id="table" maxHeight="-Infinity" prefHeight="346.0" prefWidth="630.0" GridPane.rowIndex="1">
                     <columns>
                         <TableColumn fx:id="stt" editable="false" prefWidth="75.0" sortType="DESCENDING" sortable="false" text="STT" />
                         <TableColumn fx:id="code" prefWidth="75.0" text="Mã" />
@@ -41,7 +41,7 @@
                 </TableView>
                 <HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                     <children>
-                        <TextField onAction="#filterByName" prefHeight="42.0" prefWidth="247.0" promptText="Lọc theo tên Site ..." />
+                        <TextField fx:id="inputText" onAction="#filterByName" prefHeight="42.0" prefWidth="247.0" promptText="Lọc theo tên Site ..." />
                         <ComboBox fx:id="listStatus" onAction="#filterByStatus" prefHeight="42.0" prefWidth="266.0" promptText="Lọc theo trạng thái" />
                   <Button mnemonicParsing="false" onAction="#search" prefHeight="42.0" prefWidth="52.0" text="Search" />
                     </children>
