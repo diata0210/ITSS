@@ -1,13 +1,14 @@
 package app.models;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class SiteOrder {
     private int id;
     private int orderID;
     private int siteID;
-    private int status;
-    public double finalPrice;
+    private int oStatus;
+    public BigDecimal finalPrice;
     private List<SiteOrderDetail> siteOrderDetails;
 
     public int getId() {
@@ -18,6 +19,7 @@ public class SiteOrder {
     }
 
     public int getOrderID() {
+
         return orderID;
     }
     public void setOrderID(int orderID) {
@@ -34,15 +36,23 @@ public class SiteOrder {
         return siteOrderDetails;
     }
 
-    public double getFinalPrice() {
+    public BigDecimal getFinalPrice() {
         return finalPrice;
     }
 
-    public void setFinalPrice(double finalPrice) {
+    public void setFinalPrice(BigDecimal finalPrice) {
         this.finalPrice = finalPrice;
     }
 
     public void setSiteOrderDetails(List<SiteOrderDetail> siteOrderDetails) {
         this.siteOrderDetails = siteOrderDetails;
+    }
+
+    public void setOstatus(int ostatus) {
+        this.oStatus = ostatus;
+    }
+
+    public int getOstatus() {
+        return oStatus;
     }
 }

@@ -29,11 +29,11 @@
             <children>
                 <TableView maxHeight="-Infinity" prefHeight="346.0" prefWidth="630.0" GridPane.rowIndex="1">
                     <columns>
-                        <TableColumn editable="false" prefWidth="75.0" sortType="DESCENDING" sortable="false" text="STT" />
-                        <TableColumn prefWidth="75.0" text="Mã" />
-                        <TableColumn prefWidth="75.0" text="Tên Site" />
-                        <TableColumn prefWidth="176.79998779296875" text="Tổng" />
-                        <TableColumn prefWidth="104.79998779296875" text="Trạng thái" />
+                        <TableColumn fx:id="stt" editable="false" prefWidth="75.0" sortType="DESCENDING" sortable="false" text="STT" />
+                        <TableColumn fx:id="code" prefWidth="75.0" text="Mã" />
+                        <TableColumn fx:id="site" prefWidth="75.0" text="Tên Site" />
+                        <TableColumn fx:id="finalPrice" prefWidth="176.79998779296875" text="Tổng" />
+                        <TableColumn fx:id="status" prefWidth="104.79998779296875" text="Trạng thái" />
                     </columns>
                     <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -42,7 +42,7 @@
                 <HBox nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                     <children>
                         <TextField onAction="#filterByName" prefHeight="42.0" prefWidth="247.0" promptText="Lọc theo tên Site ..." />
-                        <ComboBox onAction="#filterByStatus" prefHeight="42.0" prefWidth="266.0" promptText="Lọc theo trạng thái" />
+                        <ComboBox fx:id="listStatus" onAction="#filterByStatus" prefHeight="42.0" prefWidth="266.0" promptText="Lọc theo trạng thái" />
                   <Button mnemonicParsing="false" onAction="#search" prefHeight="42.0" prefWidth="52.0" text="Search" />
                     </children>
                     <cursor>

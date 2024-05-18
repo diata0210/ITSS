@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS Sites (
 
 CREATE TABLE IF NOT EXISTS Products (
     ID INT AUTO_INCREMENT PRIMARY KEY,
+    pcode VARCHAR(30),
     pname VARCHAR(30),
     punit VARCHAR(30),
     price INT
@@ -25,6 +26,7 @@ CREATE TABLE IF NOT EXISTS Products (
 
 CREATE TABLE IF NOT EXISTS Orders (
   ID INT AUTO_INCREMENT PRIMARY KEY,
+  oCode VARCHAR(30),
   finalPrice INT,
   descriptions VARCHAR(1000),
   -- Ngày gửi Order
@@ -55,6 +57,7 @@ CREATE TABLE IF NOT EXISTS ProductSites (
 
 CREATE TABLE IF NOT EXISTS SiteOrders (
   ID INT AUTO_INCREMENT PRIMARY KEY,
+  sideOrderCode VARCHAR(30),
   orderID INT,
   siteID INT,
   finalPrice DECIMAL(10, 2),
@@ -108,31 +111,31 @@ INSERT INTO Sites (sname, saddress, userID) VALUES
 ('Colosseum', 'Bangkok', 5),
 ('Hanoi', 'Hanoi', 8);
 
-INSERT INTO Products (pname, ptype, price, punit) VALUES
-('Laptop', 'Electronics', 1000, 'piece'),
-('Smartphone', 'Electronics', 800, 'piece'),
-('Headphones', 'Electronics', 150, 'piece'),
-('T-shirt', 'Clothing', 20, 'piece'),
-('Jeans', 'Clothing', 40, 'piece'),
-('Running Shoes', 'Footwear', 80, 'pair'),
-('Backpack', 'Accessories', 50, 'piece'),
-('Watch', 'Accessories', 200, 'piece'),
-('Sunglasses', 'Accessories', 30, 'piece'),
-('Coffee Maker', 'Appliances', 120, 'piece'),
-('Keyboard', 'Electronics', 50, 'piece'),
-('Mouse', 'Electronics', 30, 'piece'),
-('Monitor', 'Electronics', 300, 'piece'),
-('Desk Lamp', 'Home Accessories', 40, 'piece'),
-('Couch', 'Furniture', 500, 'piece'),
-('Dining Table', 'Furniture', 300, 'piece'),
-('Office Chair', 'Furniture', 200, 'piece'),
-('Running Shorts', 'Clothing', 15, 'piece'),
-('Hiking Boots', 'Footwear', 100, 'pair'),
-('Handbag', 'Accessories', 70, 'piece'),
-('Earbuds', 'Electronics', 80, 'piece'),
-('Smartwatch', 'Electronics', 250, 'piece'),
-('Fitness Tracker', 'Electronics', 120, 'piece'),
-('Blender', 'Appliances', 80, 'piece');
+INSERT INTO Products (pname, ptype, price, punit, pcode) VALUES
+('Laptop', 'Electronics', 1000, 'piece', 'LT001'),
+('Smartphone', 'Electronics', 800, 'piece', 'SP001'),
+('Headphones', 'Electronics', 150, 'piece', 'HP001'),
+('T-shirt', 'Clothing', 20, 'piece', 'TS001'),
+('Jeans', 'Clothing', 40, 'piece', 'JN001'),
+('Running Shoes', 'Footwear', 80, 'pair', 'RS001'),
+('Backpack', 'Accessories', 50, 'piece', 'BP001'),
+('Watch', 'Accessories', 200, 'piece', 'WT001'),
+('Sunglasses', 'Accessories', 30, 'piece', 'SG001'),
+('Coffee Maker', 'Appliances', 120, 'piece', 'CM001'),
+('Keyboard', 'Electronics', 50, 'piece', 'KB001'),
+('Mouse', 'Electronics', 30, 'piece', 'MS001'),
+('Monitor', 'Electronics', 300, 'piece', 'MN001'),
+('Desk Lamp', 'Home Accessories', 40, 'piece', 'DL001'),
+('Couch', 'Furniture', 500, 'piece', 'CH001'),
+('Dining Table', 'Furniture', 300, 'piece', 'DT001'),
+('Office Chair', 'Furniture', 200, 'piece', 'OC001'),
+('Running Shorts', 'Clothing', 15, 'piece', 'RS002'),
+('Hiking Boots', 'Footwear', 100, 'pair', 'HB001'),
+('Handbag', 'Accessories', 70, 'piece', 'HB002'),
+('Earbuds', 'Electronics', 80, 'piece', 'EB001'),
+('Smartwatch', 'Electronics', 250, 'piece', 'SW001'),
+('Fitness Tracker', 'Electronics', 120, 'piece', 'FT001'),
+('Blender', 'Appliances', 80, 'piece', 'BL001');
 
 INSERT INTO Vehicles (vname) VALUES
 ('Ship'),
@@ -162,13 +165,13 @@ INSERT INTO ProductSites (siteID, productID, quantity) VALUES
 (5, 15, 10), (5, 16, 15), (5, 17, 25), (5, 18, 18), (5, 19, 40),
 (5, 20, 12), (5, 21, 35), (5, 22, 28), (5, 23, 15), (5, 24, 20);
 
-INSERT INTO Orders (finalPrice, descriptions, sendDate, arriveDate, deliveryDate)
+INSERT INTO Orders (finalPrice, descriptions, sendDate, arriveDate, deliveryDate, oCode)
 VALUES
-    (0, NULL, '2024-05-10', '2024-05-20', '2024-05-15'),
-    (0, NULL, '2024-05-13', NULL, '2024-05-20'),
-    (0, NULL, '2024-05-16', NULL, '2024-05-25'),
-    (0, NULL, '2024-05-17', NULL, '2024-05-25'),
-    (0, NULL, '2024-05-15', NULL, '2024-05-20');
+  (0, NULL, '2024-05-10', '2024-05-20', '2024-05-15', 'OC001'),
+  (0, NULL, '2024-05-13', NULL, '2024-05-20', 'OC002'),
+  (0, NULL, '2024-05-16', NULL, '2024-05-25', 'OC003'),
+  (0, NULL, '2024-05-17', NULL, '2024-05-25', 'OC004'),
+  (0, NULL, '2024-05-15', NULL, '2024-05-20', 'OC005');
 
 INSERT INTO OrderDetails (productID, orderID, quantity)
 VALUES
@@ -209,21 +212,21 @@ VALUES
     (17, 5, 18),
     (22, 5, 15);
 
-INSERT INTO SiteOrders (orderID, siteID, finalPrice, oStatus)
+INSERT INTO SiteOrders (orderID, siteID, finalPrice, oStatus, sideOrderCode)
 VALUES
-    (1, 1, 0, 4),  -- Order 1 tại Site 1
-    (1, 3, 0, 4),  -- Order 1 tại Site 3
-    (1, 5, 0, 4),  -- Order 1 tại Site 5
-    (2, 2, 0, 2),  -- Order 2 tại Site 2
-    (2, 4, 0, 1),  -- Order 2 tại Site 4
-    (2, 5, 0, 3),  -- Order 2 tại Site 5
-    (3, 1, 0, 5),  -- Order 3 tại Site 1
-    (3, 2, 0, 3),  -- Order 3 tại Site 2
-    (3, 4, 0, 2),  -- Order 3 tại Site 4
-    (4, 3, 0, 5),  -- Order 4 tại Site 3
-    (4, 5, 0, 4),  -- Order 4 tại Site 5
-    (5, 1, 0, 2),  -- Order 5 tại Site 1
-    (5, 3, 0, 5);  -- Order 5 tại Site 3
+  (1, 1, 0, 4, 'SO001'),  -- Order 1 tại Site 1
+  (1, 3, 0, 4, 'SO002'),  -- Order 1 tại Site 3
+  (1, 5, 0, 4, 'SO003'),  -- Order 1 tại Site 5
+  (2, 2, 0, 2, 'SO004'),  -- Order 2 tại Site 2
+  (2, 4, 0, 1, 'SO005'),  -- Order 2 tại Site 4
+  (2, 5, 0, 3, 'SO006'),  -- Order 2 tại Site 5
+  (3, 1, 0, 5, 'SO007'),  -- Order 3 tại Site 1
+  (3, 2, 0, 3, 'SO008'),  -- Order 3 tại Site 2
+  (3, 4, 0, 2, 'SO009'),  -- Order 3 tại Site 4
+  (4, 3, 0, 5, 'SO010'),  -- Order 4 tại Site 3
+  (4, 5, 0, 4, 'SO011'),  -- Order 4 tại Site 5
+  (5, 1, 0, 2, 'SO012'),  -- Order 5 tại Site 1
+  (5, 3, 0, 5, 'SO013');  -- Order 5 tại Site 3
 
 INSERT INTO SiteOrderDetails (siteOrderID, productID, quantity)
 VALUES

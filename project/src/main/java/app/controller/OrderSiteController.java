@@ -1,10 +1,12 @@
 package app.controller;
 
+import app.models.SiteOrder;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -13,10 +15,23 @@ import java.util.ResourceBundle;
 public class OrderSiteController implements Initializable {
 
     @FXML
-    private TextField filterByName;
+    private ComboBox<String> listStatus;
 
     @FXML
-    private ComboBox<String> filterByStatus;
+    private TableColumn<SiteOrder, > code;
+
+    @FXML
+    private TableColumn<?, ?> finalPrice;
+
+    @FXML
+    private TableColumn<?, ?> site;
+
+    @FXML
+    private TableColumn<?, ?> status;
+
+    @FXML
+    private TableColumn<?, ?> stt;
+
 
     @FXML
     void addOrder(ActionEvent event) {
@@ -40,7 +55,7 @@ public class OrderSiteController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        filterByStatus.setItems(FXCollections.observableArrayList(
+        listStatus.setItems(FXCollections.observableArrayList(
                 "Đã nhận hàng",
                     "Đang giao hàng",
                     "Đã hủy" ,
