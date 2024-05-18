@@ -1,27 +1,44 @@
 package app.controller;
 
 import app.container.DIContainer;
-import app.models.OrderStatus;
 import app.models.SiteOrder;
+import app.models.SiteOrderDetail;
+import app.models.SiteOrderTable;
+import app.repositories.OrderSiteRepository;
+import app.repositories.implement.OrderSiteRepositoryImp;
 import app.services.OrderSiteServiceImp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 
 public class OrderSiteController implements Initializable {
 
-    OrderSiteServiceImp orderSiteServiceImp = DIContainer.getInstance(OrderSiteServiceImp.class);
+    OrderSiteRepository orderSiteRepository = new OrderSiteRepositoryImp();
+    OrderSiteServiceImp orderSiteServiceImp = new OrderSiteServiceImp();
+
+    private ObservableList<SiteOrderTable> siteOrders;
+    private FilteredList<SiteOrderTable> filteredOrders;
 
     @FXML
     private TableColumn<SiteOrder, String> code;
@@ -45,7 +62,7 @@ public class OrderSiteController implements Initializable {
     private TableColumn<SiteOrder, Integer> stt;
 
     @FXML
-    private TableView<SiteOrder> table;
+    private TableView<SiteOrderTable> table;
 
     @FXML
     void addOrder(ActionEvent event) {
@@ -54,12 +71,28 @@ public class OrderSiteController implements Initializable {
 
     @FXML
     void filterByName(ActionEvent event) {
-
+        String filterNameValue = inputText.getText();
+        filteredOrders.setPredicate(siteOrderTable -> {
+            // If filter text is empty, display all orders
+            if (filterNameValue == null || filterNameValue.isEmpty()) {
+                return true;
+            }
+            // Compare site order code of every site order with filterNameValue
+            return siteOrderTable.getSiteName().toLowerCase().contains(filterNameValue.toLowerCase());
+        });
     }
 
     @FXML
     void filterByStatus(ActionEvent event) {
-
+        String filterStatusValue = listStatus.getValue();
+        filteredOrders.setPredicate(siteOrderTable -> {
+            // If filter text is empty, display all orders
+            if (filterStatusValue == null || filterStatusValue.isEmpty()) {
+                return true;
+            }
+            // Compare status of every site order with filterStatusValue
+            return siteOrderTable.getOStatus().equals(filterStatusValue);
+        });
     }
 
     @FXML
@@ -67,8 +100,28 @@ public class OrderSiteController implements Initializable {
 
     }
 
+    @FXML
+    private AnchorPane pane;
 
-    private ObservableList<SiteOrder> siteOrders;
+    @FXML
+    void getItem(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/project/DetailOrderPage.fxml"));
+        Parent parent = loader.load();
+        pane.getChildren().clear();
+        pane.getChildren().add(parent);
+
+        DetailOrderController controller = loader.getController();
+        SiteOrderTable siteorders = table.getSelectionModel().getSelectedItem();
+        if (siteorders != null) {
+            System.out.println(siteorders.getID());
+
+        } else {
+            // Handle the case where no item is selected
+            System.out.println("No item selected.");
+        }
+
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -79,19 +132,31 @@ public class OrderSiteController implements Initializable {
                     "Chờ xác nhận",
                     "Đang lấy hàng"
         ));
-
         loadData();
     }
 
     private void loadData(){
-//        stt.setCellValueFactory(new PropertyValueFactory<>("ID"));
-//        code.setCellValueFactory(new PropertyValueFactory<>("siteOrderCode"));
-//        site.setCellValueFactory(new PropertyValueFactory<>("siteName"));
-//        finalPrice.setCellValueFactory(new PropertyValueFactory<>("finalPrice"));
-//        status.setCellValueFactory(new PropertyValueFactory<>("oStatus"));
-//        siteOrders = FXCollections.observableArrayList(orderSiteServiceImp.getAllSiteOrders());
-//        table.setItems(siteOrders);
-        System.out.println(orderSiteServiceImp);
+         orderSiteServiceImp.setOrderSiteRepository(orderSiteRepository);
+         List<SiteOrder> orders = orderSiteServiceImp.getAllSiteOrders();
+
+         stt.setCellValueFactory(new PropertyValueFactory<>("ID"));
+         site.setCellValueFactory(new PropertyValueFactory<>("siteName"));
+         finalPrice.setCellValueFactory(new PropertyValueFactory<>("finalPrice"));
+         status.setCellValueFactory(new PropertyValueFactory<>("oStatus"));
+         siteOrders = FXCollections.observableArrayList();
+         int stt;
+         String site, status, code;
+         BigDecimal finalPrice;
+         for(SiteOrder order : orders){
+             stt = order.getID();
+             site = order.getSiteName();
+             status = order.getOStatus();
+             finalPrice = order.getFinalPrice();
+             SiteOrderTable siteOrderTable = new SiteOrderTable(site, finalPrice, status, stt );
+             siteOrders.add(siteOrderTable);
+         }
+        filteredOrders = new FilteredList<>(siteOrders, p -> true);
+        table.setItems(filteredOrders);
     }
 
 }

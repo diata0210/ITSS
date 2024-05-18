@@ -4,6 +4,7 @@ module app.project {
     requires org.reflections;
     requires java.sql;
 
+    opens app.models to javafx.base;
 
     opens app.controller to javafx.fxml;
     opens app.project to javafx.fxml;
