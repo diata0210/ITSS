@@ -1,6 +1,5 @@
 package app.controller;
 
-import app.container.DIContainer;
 import app.models.SiteOrder;
 import app.models.SiteOrderDetail;
 import app.models.SiteOrderTable;
@@ -111,20 +110,19 @@ public class OrderSiteController implements Initializable {
         pane.getChildren().add(parent);
 
         DetailOrderController controller = loader.getController();
-        SiteOrderTable siteorders = table.getSelectionModel().getSelectedItem();
-        if (siteorders != null) {
-            System.out.println(siteorders.getID());
-
-        } else {
-            // Handle the case where no item is selected
-            System.out.println("No item selected.");
-        }
+        SiteOrder siteorder = orderSiteServiceImp.getSiteOrderById(table.getSelectionModel().getSelectedItem().getID());
+        controller.loadData(siteorder);
+//        } else {
+//            // Handle the case where no item is selected
+//            System.out.println("No item selected.");
+//        }
 
     }
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        orderSiteServiceImp.setOrderSiteRepository(orderSiteRepository);
         listStatus.setItems(FXCollections.observableArrayList(
                 "Đã nhận hàng",
                     "Đang giao hàng",
@@ -136,9 +134,7 @@ public class OrderSiteController implements Initializable {
     }
 
     private void loadData(){
-         orderSiteServiceImp.setOrderSiteRepository(orderSiteRepository);
          List<SiteOrder> orders = orderSiteServiceImp.getAllSiteOrders();
-
          stt.setCellValueFactory(new PropertyValueFactory<>("ID"));
          site.setCellValueFactory(new PropertyValueFactory<>("siteName"));
          finalPrice.setCellValueFactory(new PropertyValueFactory<>("finalPrice"));
@@ -152,8 +148,9 @@ public class OrderSiteController implements Initializable {
              site = order.getSiteName();
              status = order.getOStatus();
              finalPrice = order.getFinalPrice();
-             SiteOrderTable siteOrderTable = new SiteOrderTable(site, finalPrice, status, stt );
-             siteOrders.add(siteOrderTable);
+             System.out.println(order.getID());
+             SiteOrderTable siteorder = new SiteOrderTable(site,finalPrice, status, stt);
+             siteOrders.add(siteorder);
          }
         filteredOrders = new FilteredList<>(siteOrders, p -> true);
         table.setItems(filteredOrders);

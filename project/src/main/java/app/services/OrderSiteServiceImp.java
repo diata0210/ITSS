@@ -18,9 +18,11 @@ public class OrderSiteServiceImp {
     }
 
     public List<SiteOrder> getAllSiteOrders() {
-        if (orderSiteRepository == null) {
-            throw new IllegalStateException("OrderSiteRepository is not properly injected.");
-        }
         return this.orderSiteRepository.getAlls();
     }
+
+    public SiteOrder getSiteOrderById(int id){
+        return this.orderSiteRepository.getById(id);
+    }
+
 }

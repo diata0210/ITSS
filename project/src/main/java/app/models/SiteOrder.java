@@ -5,16 +5,12 @@ import java.util.List;
 
 public class SiteOrder {
     private int ID;
-    public String siteOrderCode;
     private String siteName;
     public BigDecimal finalPrice;
     private String orderCode;
     private String oStatus;
     private List<SiteOrderDetail> siteOrderDetails;
 
-    public String getSiteOrderCode() {
-        return siteOrderCode;
-    }
 
     public String getSiteName() {
         return siteName;
@@ -52,10 +48,6 @@ public class SiteOrder {
 
     public BigDecimal getFinalPrice() {
         return finalPrice;
-    }
-
-    public void setSiteOrderCode(String siteOrderCode) {
-        this.siteOrderCode = siteOrderCode;
     }
 
     public void setSiteName(String siteName) {

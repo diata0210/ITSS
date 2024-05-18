@@ -6,7 +6,7 @@ import java.util.List;
 public class SiteOrderTable {
     private int ID;
     private String siteName;
-    public BigDecimal finalPrice;
+    private BigDecimal finalPrice;
     private String oStatus;
 
     public SiteOrderTable(String siteName, BigDecimal finalPrice, String oStatus, int ID) {

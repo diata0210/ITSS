@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface OrderSiteRepository {
     List<SiteOrder> getAlls();
-    SiteOrder getById();
+    SiteOrder getById( int id);
     SiteOrder getByStatus(int id);
 }
 
