@@ -1,19 +1,26 @@
 package app.services;
 
-import app.annotation.Component;
-import app.annotation.Inject;
 import app.models.SiteOrder;
 import app.repositories.OrderSiteRepository;
 
 import java.util.List;
 
-@Component
 public class OrderSiteServiceImp {
 
-    @Inject
     private OrderSiteRepository orderSiteRepository;
 
+    public OrderSiteRepository getOrderSiteRepository() {
+        return orderSiteRepository;
+    }
+
+    public void setOrderSiteRepository(OrderSiteRepository orderSiteRepository) {
+        this.orderSiteRepository = orderSiteRepository;
+    }
+
     public List<SiteOrder> getAllSiteOrders() {
-        return orderSiteRepository.getAlls();
+        if (orderSiteRepository == null) {
+            throw new IllegalStateException("OrderSiteRepository is not properly injected.");
+        }
+        return this.orderSiteRepository.getAlls();
     }
 }

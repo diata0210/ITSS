@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="655.0" style="-fx-border-width: 0 0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.OrderSiteController">
+<AnchorPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="655.0" style="-fx-border-width: 0 0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.OrderSiteController">
     <children>
         <GridPane layoutX="12.8" layoutY="89.0" prefHeight="422.0" prefWidth="630.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="12.0">
             <columnConstraints>
@@ -27,12 +27,11 @@
                 <RowConstraints maxHeight="437.6000061035156" minHeight="10.0" prefHeight="359.3999755859375" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <TableView fx:id="table" maxHeight="-Infinity" prefHeight="346.0" prefWidth="630.0" GridPane.rowIndex="1">
+                <TableView fx:id="table" maxHeight="-Infinity" onMouseClicked="#getItem" prefHeight="346.0" prefWidth="630.0" GridPane.rowIndex="1">
                     <columns>
                         <TableColumn fx:id="stt" editable="false" prefWidth="75.0" sortType="DESCENDING" sortable="false" text="STT" />
-                        <TableColumn fx:id="code" prefWidth="75.0" text="Mã" />
-                        <TableColumn fx:id="site" prefWidth="75.0" text="Tên Site" />
-                        <TableColumn fx:id="finalPrice" prefWidth="176.79998779296875" text="Tổng" />
+                        <TableColumn fx:id="site" prefWidth="187.2000732421875" text="Tên Site" />
+                        <TableColumn fx:id="finalPrice" prefWidth="179.199951171875" text="Tổng" />
                         <TableColumn fx:id="status" prefWidth="104.79998779296875" text="Trạng thái" />
                     </columns>
                     <columnResizePolicy>

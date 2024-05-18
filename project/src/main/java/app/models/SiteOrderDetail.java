@@ -1,22 +1,22 @@
 package app.models;
 
 public class SiteOrderDetail {
-    private String pCode;
+    private String pName;
     private int quantity;
-
-    public String getpCode() {
-        return pCode;
-    }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public void setpCode(String pCode) {
-        this.pCode = pCode;
+    public String getpName() {
+        return pName;
     }
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public void setpName(String pName) {
+        this.pName = pName;
     }
 }
