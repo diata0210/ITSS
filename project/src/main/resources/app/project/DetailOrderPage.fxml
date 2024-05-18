@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="655.0" style="-fx-border-width: 0 0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="655.0" style="-fx-border-width: 0 0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.DetailOrderController">
     <children>
         <Pane accessibleRole="BUTTON" maxHeight="-Infinity" prefHeight="95.0" prefWidth="655.0">
             <children>
-                <Label layoutX="60.0" layoutY="30.0" text="Thông tin chi tiết đơn hàng">
+                <Label layoutX="59.0" layoutY="25.0" prefHeight="45.0" prefWidth="498.0" text="Thông tin chi tiết đơn hàng đến Site">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="28.0" />
                     </font>
                 </Label>
             <ImageView fitHeight="30.0" fitWidth="40.0" layoutX="14.0" layoutY="33.0" onMouseClicked="#back" pickOnBounds="true" preserveRatio="true">
@@ -28,50 +30,103 @@
             </ImageView>
             </children>
         </Pane>
-        <Pane layoutY="102.0" maxHeight="-Infinity" prefHeight="95.0" prefWidth="655.0">
+        <Pane layoutY="102.0" maxHeight="-Infinity" prefHeight="66.0" prefWidth="655.0">
             <children>
-                <TextField fx:id="orderCodeValue" layoutX="114.0" layoutY="19.0" prefHeight="29.0" prefWidth="99.0" promptText="ABCS1" text="ABCS1">
-                    <padding>
-                        <Insets bottom="4.0" left="10.0" right="10.0" top="4.0" />
-                    </padding>
-                </TextField>
-                <TextField editable="false" layoutX="14.0" layoutY="19.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="29.0" prefWidth="96.0" text="Mã đơn hàng:" />
-                <TextField layoutX="14.0" layoutY="56.0" prefHeight="29.0" prefWidth="69.0" text="Lý do hủy:" />
-                <TextField fx:id="rejectReason" layoutX="94.0" layoutY="56.0" prefHeight="29.0" prefWidth="556.0" text="Sản phẩm B của site Abc không đủ số lượng." />
-                <TextField editable="false" layoutX="234.0" layoutY="19.0" prefHeight="29.0" prefWidth="77.0" text="Trạng thái: " />
-                <TextField fx:id="status" editable="false" layoutX="343.0" layoutY="19.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="29.0" prefWidth="124.0" text="Hủy" />
-            </children>
-        </Pane>
-        <AnchorPane layoutX="-16.0" layoutY="378.0" prefHeight="124.0" prefWidth="686.0" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="-15.399999999999977">
-            <children>
-                <AnchorPane layoutX="361.0" layoutY="78.0" prefHeight="32.0" prefWidth="124.0" style="-fx-background-color: rgb(255, 51, 51);">
-                    <children>
-                        <Text fill="WHITE" layoutX="18.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hủy đơn hàng">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Text>
-                    </children>
-                </AnchorPane>
-                <AnchorPane layoutX="497.0" layoutY="78.0" prefHeight="32.0" prefWidth="138.0" style="-fx-background-color: rgb(51, 255, 51);">
-                    <children>
-                        <Text layoutX="26.0" layoutY="21.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tạo đơn hàng" wrappingWidth="86.0712890625">
-                            <font>
-                                <Font size="14.0" />
-                            </font>
-                        </Text>
-                    </children>
-                </AnchorPane>
-            </children>
-        </AnchorPane>
-      <Pane layoutY="216.0" prefHeight="206.0" prefWidth="655.0">
-         <children>
-            <HBox layoutX="13.0" prefHeight="30.0" prefWidth="151.0">
+            <HBox layoutY="-6.0" prefHeight="77.0" prefWidth="655.0" spacing="10.0">
                <children>
-                  <Label prefHeight="30.0" prefWidth="151.0" text="Danh sách đơn hàng" />
+                  <HBox alignment="CENTER" prefHeight="76.0" prefWidth="203.0" spacing="10.0">
+                     <children>
+                        <Label text="Mã đơn hàng">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                            <TextField fx:id="orderCodeValue" prefHeight="34.0" prefWidth="70.0" promptText="ABCS1">
+                                <padding>
+                                    <Insets bottom="4.0" left="10.0" right="10.0" top="4.0" />
+                                </padding>
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                            </TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="77.0" prefWidth="239.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="27.0" prefWidth="84.0" text="Trạng thái">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                            <TextField fx:id="statusValue" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="38.0" prefWidth="140.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="77.0" prefWidth="133.0" spacing="10.0">
+                     <children>
+                        <Label text="Site">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="siteValue" prefHeight="39.0" prefWidth="87.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </HBox>
                </children>
             </HBox>
-            <VBox layoutX="14.0" layoutY="30.0" prefHeight="200.0" prefWidth="151.0" />
+            </children>
+        </Pane>
+      <Pane layoutY="221.0" prefHeight="239.0" prefWidth="655.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <TableView fx:id="table" layoutY="-2.0" prefHeight="197.0" prefWidth="655.0">
+              <columns>
+                <TableColumn fx:id="ID" prefWidth="73.3333410024643" text="ID" />
+                  <TableColumn fx:id="pName" minWidth="4.0" prefWidth="151.33331298828125" text="Tên sản phẩm" />
+                  <TableColumn fx:id="quantity" prefWidth="134.66665649414062" text="Số lượng" />
+                  <TableColumn fx:id="pPrice" prefWidth="134.0" text="Tổng tiền" />
+                  <TableColumn fx:id="status" prefWidth="159.33331298828125" text="Trạng thái" />
+              </columns>
+            </TableView>
+            <HBox alignment="CENTER" layoutX="445.0" layoutY="195.0" prefHeight="45.0" prefWidth="210.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="56.0" text="Tổng:">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="finalPrice" prefHeight="37.0" prefWidth="99.0" />
+               </children>
+            </HBox>
+         </children>
+      </Pane>
+      <AnchorPane layoutY="460.0" prefHeight="60.0" prefWidth="665.0" AnchorPane.bottomAnchor="-10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-10.0">
+         <children>
+            <HBox alignment="CENTER" layoutX="5.0" layoutY="-16.0" prefHeight="60.0" prefWidth="655.0" spacing="20.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#reCreateOrder" prefHeight="40.0" prefWidth="178.0" style="-fx-background-color: #01CE0B;" text="Tạo lại đơn hàng" textFill="WHITE">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <Pane layoutX="10.0" layoutY="159.0" prefHeight="53.0" prefWidth="648.0" AnchorPane.leftAnchor="10.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" layoutX="-1.0" layoutY="-3.0" prefHeight="52.0" prefWidth="203.0">
+               <children>
+                  <TextField fx:id="inputValue" onAction="#filterByName" prefHeight="32.0" prefWidth="203.0" promptText="Lọc theo tên" />
+               </children>
+            </HBox>
+            <ComboBox fx:id="statuspValue" layoutX="220.0" layoutY="7.0" onAction="#filterByStatus" prefHeight="32.0" prefWidth="185.0" promptText="Lọc theo trạng thái" />
          </children>
       </Pane>
     </children>

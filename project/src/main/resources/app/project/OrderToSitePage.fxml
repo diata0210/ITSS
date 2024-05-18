@@ -60,7 +60,7 @@
             <children>
                 <Label layoutX="27.0" layoutY="30.0" text="Đơn hàng đặt đến Site">
                     <font>
-                        <Font size="24.0" />
+                        <Font size="28.0" />
                     </font>
                 </Label>
                 <Pane accessibleRole="BUTTON" layoutX="693.0" layoutY="30.0" prefHeight="35.0" prefWidth="126.0" />

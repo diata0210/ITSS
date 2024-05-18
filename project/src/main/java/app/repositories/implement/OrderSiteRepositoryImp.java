@@ -43,7 +43,7 @@ public class OrderSiteRepositoryImp implements OrderSiteRepository {
 
     private List<SiteOrderDetail> getSiteOrderDetails(int siteOrderID) {
         List<SiteOrderDetail> siteOrderDetails = new ArrayList<>();
-        String query = "SELECT quantity, p.pname FROM SiteOrderDetails sod " +
+        String query = "SELECT p.ID, quantity, p.pname, sod.finalPrice, sod.soStatus FROM SiteOrderDetails sod " +
                 "JOIN Products p ON sod.productID = p.ID " +
                 "WHERE sod.siteOrderID = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
@@ -51,10 +51,13 @@ public class OrderSiteRepositoryImp implements OrderSiteRepository {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 SiteOrderDetail siteOrderDetail = new SiteOrderDetail();
-                siteOrderDetail.setpName(resultSet.getString("pname"));
+                siteOrderDetail.setPID(resultSet.getInt(("ID")));
+                siteOrderDetail.setPName(resultSet.getString("pname"));
                 siteOrderDetail.setQuantity(resultSet.getInt("quantity"));
-
+                siteOrderDetail.setPPrice(resultSet.getBigDecimal("finalPrice"));
+                siteOrderDetail.setStatus(resultSet.getInt("soStatus"));
                 siteOrderDetails.add(siteOrderDetail);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -63,9 +66,32 @@ public class OrderSiteRepositoryImp implements OrderSiteRepository {
     }
 
     @Override
-    public SiteOrder getById() {
-        return null;
-    }
+    public SiteOrder getById(int id) {
+        SiteOrder siteOrder = new SiteOrder();
+        String query = "SELECT so.ID, s.sname, so.finalPrice, so.oStatus " +
+                "FROM SiteOrders so " +
+                "JOIN Sites s ON so.siteID = s.ID " +
+                "WHERE so.ID = ?";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                siteOrder.setID(resultSet.getInt("ID"));
+                siteOrder.setSiteName(resultSet.getString("sname"));
+                siteOrder.setFinalPrice(resultSet.getBigDecimal("finalPrice"));
+                siteOrder.setOStatus(resultSet.getInt("oStatus"));
+                List<SiteOrderDetail> siteOrderDetails = getSiteOrderDetails(id);
+                siteOrder.setSiteOrderDetails(siteOrderDetails);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return siteOrder;
+
+
+    };
+
 
     @Override
     public SiteOrder getByStatus(int id) {

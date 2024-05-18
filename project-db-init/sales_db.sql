@@ -66,11 +66,16 @@ CREATE TABLE IF NOT EXISTS SiteOrders (
 CREATE TABLE IF NOT EXISTS SiteOrderDetails (
   siteOrderID INT,
   productID INT,
+  finalPrice DECIMAL(10, 2),
   quantity INT,
+  soStatus INT,
   PRIMARY KEY (siteOrderID, productID),
   FOREIGN KEY (siteOrderID) REFERENCES SiteOrders(ID),
   FOREIGN KEY (productID) REFERENCES Products(ID)
 );
+
+-- soStatus == 1:  Không đủ
+-- soStatus == 2:  Còn hàng
 
 CREATE TABLE IF NOT EXISTS Vehicles(
   ID INT AUTO_INCREMENT PRIMARY KEY,
@@ -283,4 +288,26 @@ UPDATE SiteOrders
   FROM SiteOrderDetails
   JOIN Products ON SiteOrderDetails.productID = Products.ID
   WHERE SiteOrders.ID = SiteOrderDetails.siteOrderID
-)
+);
+
+UPDATE SiteOrderDetails sod
+JOIN Products p ON sod.productID = p.ID
+SET sod.finalPrice = p.price * sod.quantity;
+
+DELIMITER //
+CREATE TRIGGER update_soStatus BEFORE INSERT ON SiteOrderDetails
+FOR EACH ROW
+BEGIN
+    DECLARE siteQuantity INT;
+    SELECT quantity INTO siteQuantity
+    FROM ProductSites
+    WHERE productID = NEW.productID AND siteID = NEW.siteOrderID;
+    
+    IF NEW.quantity <= siteQuantity THEN
+        SET NEW.soStatus = 1;
+    ELSE
+        SET NEW.soStatus = 2;
+    END IF;
+END;
+//
+DELIMITER ;
