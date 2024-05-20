@@ -1,20 +1,12 @@
 package app.controller;
 
-import java.io.IOException;
-import java.util.Objects;
-
-import app.project.App;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import app.models.LoginModel;
 public class LoginController {
-
     @FXML
     private TextField paswordField;
 
@@ -25,20 +17,15 @@ public class LoginController {
     void clickedForgotPassword(MouseEvent event) {
 
     }
-    private AnchorPane anchorPane;
     @FXML
     void onLogin(ActionEvent event) {
+        String username = usernameField.getText();
+        String password = paswordField.getText();
+        LoginModel login = new LoginModel();
         Stage loginStage = (Stage) usernameField.getScene().getWindow();
-        loginStage.close();
-        try {
-            FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("/app/project/Layout.fxml"));
-            Parent root = loader.load();
-            Stage homeStage = new Stage();
-            homeStage.setScene(new Scene(root));
-            homeStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(login.login(username,password)){
+            loginStage.close();
+            login.start();
         }
     }
-
 }
