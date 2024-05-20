@@ -1,16 +1,16 @@
 package app.models;
 
 public class ProductSite {
-    private int id;
     private int siteID;
     private int productID;
     private int quantity;
-    public int getId() {
-        return id;
+
+    public ProductSite(int siteID, int productID, int quantity) {
+        this.siteID = siteID;
+        this.productID = productID;
+        this.quantity = quantity;
     }
-    public void setId(int id) {
-        this.id = id;
-    }
+
     public int getSiteID() {
         return siteID;
     }

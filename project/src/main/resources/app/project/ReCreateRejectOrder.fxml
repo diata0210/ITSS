@@ -9,6 +9,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -17,19 +19,28 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="510.0" prefWidth="655.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.ReCreateRejectOrderController">
+<AnchorPane fx:id="pane" prefHeight="510.0" prefWidth="655.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.ReCreateRejectOrderController">
    <children>
-      <AnchorPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="655.0" style="-fx-border-width: 0 0;">
-         <children>
+
             <Pane accessibleRole="BUTTON" layoutX="-2.0" maxHeight="-Infinity" prefHeight="96.0" prefWidth="655.0">
                <children>
-                  <Label layoutX="24.0" layoutY="28.0" prefHeight="40.0" prefWidth="266.0" text="Tạo lại đơn hàng hủy">
-                     <font>
-                        <Font size="28.0" />
-                     </font>
-                  </Label>
-                  <Pane accessibleRole="BUTTON" layoutX="693.0" layoutY="30.0" prefHeight="35.0" prefWidth="126.0" />
+                  <HBox alignment="CENTER_LEFT" layoutX="5.0" layoutY="-2.0" prefHeight="100.0" prefWidth="386.0" spacing="10.0">
+                     <children>
+                        <ImageView fx:id="handleBack" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../img/back_2099190.png" />
+                           </image>
+                        </ImageView>
+                        <Label prefHeight="40.0" prefWidth="266.0" text="Tạo lại đơn hàng hủy">
+                           <font>
+                              <Font size="28.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </HBox>
                </children>
             </Pane>
             <Pane layoutX="-2.0" layoutY="91.0" prefHeight="418.0" prefWidth="655.0">
@@ -43,7 +54,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="26.0" prefWidth="73.0" />
+                              <TextField fx:id="rejectCode" editable="false" prefHeight="26.0" prefWidth="73.0" />
                            </children>
                            <HBox.margin>
                               <Insets left="10.0" />
@@ -51,7 +62,7 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="54.0" prefWidth="322.0">
                            <children>
-                              <ComboBox fx:id="listStatus" onAction="#filterByStatus" prefHeight="32.0" prefWidth="266.0" promptText="Chọn sản phẩm" />
+                              <ComboBox fx:id="listProduct" onAction="#filterProduct" prefHeight="32.0" prefWidth="266.0" promptText="Chọn sản phẩm" />
                            </children>
                         </HBox>
                      </children>
@@ -69,13 +80,13 @@
                      <children>
                         <TableView fx:id="table" maxHeight="-Infinity" onMouseClicked="#getItem" prefHeight="138.0" prefWidth="638.0" GridPane.rowIndex="3">
                            <columns>
-                              <TableColumn fx:id="stt" editable="false" prefWidth="49.60000705718994" sortType="DESCENDING" sortable="false" text="ID" />
-                              <TableColumn fx:id="site" prefWidth="115.99999618530273" text="Tên Site" />
-                              <TableColumn fx:id="finalPrice" prefWidth="82.40003967285156" text="Số lượng" />
-                              <TableColumn fx:id="status" prefWidth="90.40003967285156" text="Thành tiền" />
-                              <TableColumn prefWidth="107.199951171875" text="Phương tiện" />
-                              <TableColumn prefWidth="94.39996337890625" text="Ngày đến" />
-                              <TableColumn prefWidth="100.800048828125" text="Xóa" />
+                              <TableColumn fx:id="ID" editable="false" prefWidth="54.66665554046631" sortType="DESCENDING" sortable="false" text="Mã Site" />
+                              <TableColumn fx:id="site" prefWidth="109.33333969116211" text="Tên Site" />
+                              <TableColumn fx:id="quantity" prefWidth="82.40003967285156" text="Số lượng" />
+                              <TableColumn fx:id="price" prefWidth="90.40003967285156" text="Thành tiền" />
+                              <TableColumn fx:id="vehicle" prefWidth="107.199951171875" text="Phương tiện" />
+                              <TableColumn fx:id="arrDate" prefWidth="94.39996337890625" text="Ngày đến" />
+                              <TableColumn fx:id="delete" prefWidth="100.800048828125" text="Xóa" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -99,7 +110,7 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="32.0" prefWidth="150.0" text="Laptop">
+                                    <TextField fx:id="productValue" editable="false" prefHeight="32.0" prefWidth="150.0" text="Laptop">
                                        <font>
                                           <Font size="14.0" />
                                        </font>
@@ -113,7 +124,7 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField prefHeight="32.0" prefWidth="37.0" />
+                                    <TextField fx:id="quantityRequired" editable="false" prefHeight="32.0" prefWidth="37.0" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="34.0" prefWidth="222.0">
@@ -125,7 +136,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </Label>
-                                          <DatePicker prefHeight="32.0" prefWidth="95.0" />
+                                          <DatePicker fx:id="deliverDate" editable="false" prefHeight="32.0" prefWidth="95.0" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -136,7 +147,7 @@
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="130.0">
                                  <children>
-                                    <ComboBox fx:id="listStatus1" onAction="#filterByStatus" prefHeight="32.0" prefWidth="101.0" promptText="Chọn site" />
+                                    <ComboBox fx:id="listSite" onAction="#filterSite" prefHeight="32.0" prefWidth="101.0" promptText="Chọn site" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="256.0">
@@ -157,21 +168,21 @@
                                  <children>
                                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <TextField prefHeight="32.0" prefWidth="106.0" promptText="Số lượng cần đặt" />
+                                          <TextField fx:id="quantityOrder" prefHeight="32.0" prefWidth="88.0" promptText="Số lượng đặt" />
                                           <Label text="/">
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
                                           </Label>
-                                          <TextField prefHeight="32.0" prefWidth="100.0" promptText="Số lượng kho" />
+                                          <TextField fx:id="quantityStore" editable="false" prefHeight="32.0" prefWidth="91.0" promptText="Số lượng kho" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="308.0" spacing="10.0">
                                        <children>
-                                          <ComboBox fx:id="listStatus11" onAction="#filterByStatus" prefHeight="32.0" prefWidth="142.0" promptText="Chọn phương tiện" />
+                                          <ComboBox fx:id="vehicelValue" onAction="#filterVehicle" prefHeight="32.0" prefWidth="142.0" promptText="Chọn phương tiện" />
                                           <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="136.0">
                                              <children>
-                                                <DatePicker prefHeight="32.0" prefWidth="179.0" promptText="Ngày đến " />
+                                                <DatePicker fx:id="arrivedDate" editable="false" prefHeight="32.0" prefWidth="179.0" promptText="Ngày đến " />
                                              </children>
                                           </HBox>
                                        </children>
@@ -180,7 +191,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" prefHeight="41.0" prefWidth="114.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="110.0" text="Thêm " />
+                                    <Button mnemonicParsing="false" onAction="#addAProduct" prefHeight="32.0" prefWidth="110.0" text="Thêm " />
                                  </children>
                               </HBox>
                            </children>
@@ -191,7 +202,7 @@
                      <children>
                         <HBox alignment="CENTER" layoutX="216.0" layoutY="12.0" prefHeight="40.0" prefWidth="222.0">
                            <children>
-                              <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="130.0" text="Tạo đơn hàng" />
+                              <Button mnemonicParsing="false" onAction="#addAllOrder" prefHeight="32.0" prefWidth="130.0" text="Tạo đơn hàng" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="516.0" prefHeight="63.0" prefWidth="142.0" spacing="10.0">
@@ -201,7 +212,7 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <TextField prefHeight="26.0" prefWidth="90.0" />
+                              <TextField fx:id="finalPrice" prefHeight="26.0" prefWidth="90.0" />
                            </children>
                         </HBox>
                      </children>
@@ -209,6 +220,4 @@
                </children>
             </Pane>
          </children>
-      </AnchorPane>
-   </children>
 </AnchorPane>

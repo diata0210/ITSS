@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="655.0" style="-fx-border-width: 0 0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.DetailOrderController">
+<AnchorPane fx:id="pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="655.0" style="-fx-border-width: 0 0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.DetailOrderController">
     <children>
         <Pane accessibleRole="BUTTON" maxHeight="-Infinity" prefHeight="95.0" prefWidth="655.0">
             <children>
@@ -85,7 +85,7 @@
         </Pane>
       <Pane layoutY="221.0" prefHeight="239.0" prefWidth="655.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <TableView fx:id="table" layoutY="-2.0" prefHeight="197.0" prefWidth="655.0">
+            <TableView fx:id="table" layoutY="-2.0" onMouseClicked="#getItem" prefHeight="197.0" prefWidth="655.0">
               <columns>
                 <TableColumn fx:id="ID" prefWidth="73.3333410024643" text="ID" />
                   <TableColumn fx:id="pName" minWidth="4.0" prefWidth="151.33331298828125" text="Tên sản phẩm" />
