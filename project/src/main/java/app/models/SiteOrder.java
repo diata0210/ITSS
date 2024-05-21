@@ -7,10 +7,43 @@ public class SiteOrder {
     private int ID;
     private String siteName;
     public BigDecimal finalPrice;
-    private String orderCode;
     private String oStatus;
     private List<SiteOrderDetail> siteOrderDetails;
+    private String deliveryDate;
+    private String sendDate;
+    private int sellOrderID;
 
+    public  SiteOrder(){}
+
+    public SiteOrder(String site,BigDecimal finalPrice, String status, int ID){
+        this.siteName = site;
+        this.finalPrice = finalPrice;
+        this.oStatus = status;
+        this.ID = ID;
+    }
+    public int getSellOrderID() {
+        return sellOrderID;
+    }
+
+    public void setSellOrderID(int sellOrderID) {
+        this.sellOrderID = sellOrderID;
+    }
+
+    public String getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public String getSendDate() {
+        return sendDate;
+    }
+
+    public void setDeliveryDate(String deliveryDate) {
+        this.deliveryDate = deliveryDate;
+    }
+
+    public void setSendDate(String sendDate) {
+        this.sendDate = sendDate;
+    }
 
     public String getSiteName() {
         return siteName;
@@ -42,10 +75,6 @@ public class SiteOrder {
         }
     }
 
-    public String getOrderCode() {
-        return orderCode;
-    }
-
     public BigDecimal getFinalPrice() {
         return finalPrice;
     }
@@ -65,13 +94,5 @@ public class SiteOrder {
 
     public void setID(int ID) {
         this.ID = ID;
-    }
-
-    public void setOrderCode(String orderCode) {
-        this.orderCode = orderCode;
-    }
-
-    public String getoStatus() {
-        return oStatus;
     }
 }

@@ -2,7 +2,7 @@ package app.models;
 
 import java.util.Date;
 
-public class Order {
+public class SellOrder {
     private int orderID;
     private int finalPrice;
     private String descriptions;

@@ -2,46 +2,51 @@ package app.controller;
 
 import app.models.SiteOrder;
 import app.models.SiteOrderDetail;
-import app.models.SiteOrderDetailTable;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class DetailOrderController implements Initializable {
 
 
-    private ObservableList<SiteOrderDetailTable> orderDetails;
-    private FilteredList<SiteOrderDetailTable> filteredOrders;
+    private ObservableList<SiteOrderDetail> orderDetails;
+    private FilteredList<SiteOrderDetail> filteredOrders;
 
     @FXML
-    private TableView<SiteOrderDetailTable> table;
+    private AnchorPane pane;
 
     @FXML
-    private TableColumn<SiteOrderDetailTable, Integer> ID;
+    private TableView<SiteOrderDetail> table;
 
     @FXML
-    private TableColumn<SiteOrderDetailTable, String> pName;
+    private TableColumn<SiteOrderDetail, Integer> ID;
 
     @FXML
-    private TableColumn<SiteOrderDetailTable, BigDecimal> pPrice;
+    private TableColumn<SiteOrderDetail, String> pName;
 
     @FXML
-    private TableColumn<SiteOrderDetailTable, Integer> quantity;
+    private TableColumn<SiteOrderDetail, BigDecimal> pPrice;
 
     @FXML
-    private TableColumn<SiteOrderDetailTable, String> status;
+    private TableColumn<SiteOrderDetail, Integer> quantity;
+
+    @FXML
+    private TableColumn<SiteOrderDetail, String> status;
 
     @FXML
     private Button ReCreateOrder;
@@ -70,23 +75,39 @@ public class DetailOrderController implements Initializable {
     }
 
     @FXML
+    void getItem(MouseEvent event) {
+
+    }
+
+    private SiteOrder orders;
+
+    @FXML
     private TextField statusValue;
 
     @FXML
-    void back(MouseEvent event) {
-
+    void back(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/project/OrderToSitePage.fxml"));
+        Parent parent = loader.load();
+        pane.getChildren().clear();
+        pane.getChildren().add(parent);
     }
 
     @FXML
-    void reCreateOrder(ActionEvent event) {
-
+    void reCreateOrder(ActionEvent event) throws  IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/project/ReCreateRejectOrder.fxml"));
+        Parent parent = loader.load();
+        pane.getChildren().clear();
+        pane.getChildren().add(parent);
+        ReCreateRejectOrderController controller = loader.getController();
+        controller.loadPage(orders);
     }
+
 
     @FXML
     private TextField siteValue;
 
     public void initializeTable(){
-        ID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        ID.setCellValueFactory(new PropertyValueFactory<>("pID"));
         pName.setCellValueFactory(new PropertyValueFactory<>("pName"));
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         pPrice.setCellValueFactory(new PropertyValueFactory<>("pPrice"));
@@ -94,25 +115,10 @@ public class DetailOrderController implements Initializable {
     }
 
     public void loadData(SiteOrder siteOrder){
-        orderDetails = FXCollections.observableArrayList();
-
-        String productName, status;
-        int id, pquantity;
-        BigDecimal pPrice;
+        this.orders = siteOrder;
+        orderDetails = FXCollections.observableArrayList(siteOrder.getSiteOrderDetails());
         initializeTable();
-        List<SiteOrderDetail> siteOrderDetails = siteOrder.getSiteOrderDetails();
-        for(SiteOrderDetail siteOrderDetail: siteOrderDetails){
-            id = siteOrderDetail.getPID();
-            productName = siteOrderDetail.getPName();
-            pquantity = siteOrderDetail.getQuantity();
-            pPrice = siteOrderDetail.getPPrice();
-            status = siteOrderDetail.getStatus();
-            SiteOrderDetailTable order = new SiteOrderDetailTable(id, productName, pquantity, pPrice, status);
-            orderDetails.add(order);
-        }
         table.setItems(orderDetails);
-
-        // set title
         orderCodeValue.setText(String.valueOf(siteOrder.getID()));
         statusValue.setText(siteOrder.getOStatus());
         siteValue.setText(siteOrder.getSiteName());

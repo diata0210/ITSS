@@ -1,38 +1,48 @@
 package app.models;
+
+import java.util.List;
+
 public class Site {
     private int id;
-    private String name;
-    private String address;
-    private int deliveryByAir;
-    private int deliveryByShip;
+    private String sname;
+    private String saddress;
+    private List<ProductSite> productSites;
+
+    public Site(int id, String sname, String saddress) {
+        this.id = id;
+        this.sname = sname;
+        this.saddress = saddress;
+    }
+
+    public String getSname() {
+        return sname;
+    }
+
+    public void setSname(String sname) {
+        this.sname = sname;
+    }
+
     public int getId() {
         return id;
     }
+
     public void setId(int id) {
         this.id = id;
     }
-    public String getName() {
-        return name;
+
+    public String getSaddress() {
+        return saddress;
     }
-    public void setName(String name) {
-        this.name = name;
+
+    public void setSaddress(String saddress) {
+        this.saddress = saddress;
     }
-    public String getAddress() {
-        return address;
+
+    public List<ProductSite> getProductSites() {
+        return productSites;
     }
-    public void setAddress(String address) {
-        this.address = address;
-    }
-    public int getDeliveryByAir() {
-        return deliveryByAir;
-    }
-    public void setDeliveryByAir(int deliveryByAir) {
-        this.deliveryByAir = deliveryByAir;
-    }
-    public int getDeliveryByShip() {
-        return deliveryByShip;
-    }
-    public void setDeliveryByShip(int deliveryByShip) {
-        this.deliveryByShip = deliveryByShip;
+
+    public void setProductSites(List<ProductSite> productSites) {
+        this.productSites = productSites;
     }
 }

@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS Products (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     pname VARCHAR(30),
     punit VARCHAR(30),
-    price INT
+    price DECIMAL(10, 2)
 );
 
 CREATE TABLE IF NOT EXISTS Orders (

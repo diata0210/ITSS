@@ -1,6 +1,6 @@
 package app.models;
 
-public class OrderDetail {
+public class SellOrderDetail {
     private int productID;
     private int orderID;
     private int quantity;
