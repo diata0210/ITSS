@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import app.controller.SiteHomePageController;
 
 public class LoginModel {
     private Connection connection = DatabaseConnection.getConnection();
@@ -38,6 +39,9 @@ public class LoginModel {
         if (user.getRole() == 2){
             loginWithOrderDepartment();
         }
+        else if (user.getRole() == 3){
+            loginWithSite();
+        }
     }
     private void loginWithOrderDepartment(){
         try {
@@ -46,6 +50,20 @@ public class LoginModel {
             Stage homeStage = new Stage();
             homeStage.setScene(new Scene(root));
             homeStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void loginWithSite(){
+        try {
+            FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("/app/project/SiteHomepage.fxml"));
+            Parent root = loader.load();
+            SiteHomePageController controller = loader.getController();
+            controller.setUserId(3);
+            controller.initialize(null, null);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }

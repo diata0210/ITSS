@@ -4,6 +4,8 @@ public class ProductSite {
     private int id;
     private int siteID;
     private int productID;
+    private String name;
+    private int price;
     private int quantity;
     public int getId() {
         return id;
@@ -22,6 +24,18 @@ public class ProductSite {
     }
     public void setProductID(int productID) {
         this.productID = productID;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public int getPrice() {
+        return price;
+    }
+    public void setPrice(int price) {
+        this.price = price;
     }
     public int getQuantity() {
         return quantity;
