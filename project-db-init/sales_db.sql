@@ -58,7 +58,10 @@ CREATE TABLE IF NOT EXISTS SiteOrders (
   orderID INT,
   siteID INT,
   finalPrice DECIMAL(10, 2),
+  actualValue DECIMAL(10, 2),
+  arrivalDate DATETIME,
   oStatus INT,
+  vehicleID INT,
   FOREIGN KEY (siteID) REFERENCES Sites(ID),
   FOREIGN KEY (orderID) REFERENCES Orders(ID)
 );
@@ -68,6 +71,7 @@ CREATE TABLE IF NOT EXISTS SiteOrderDetails (
   productID INT,
   finalPrice DECIMAL(10, 2),
   quantity INT,
+  actualQuantity INT,
   soStatus INT,
   PRIMARY KEY (siteOrderID, productID),
   FOREIGN KEY (siteOrderID) REFERENCES SiteOrders(ID),
@@ -214,21 +218,22 @@ VALUES
     (17, 5, 18),
     (22, 5, 15);
 
-INSERT INTO SiteOrders (orderID, siteID, finalPrice, oStatus)
+INSERT INTO SiteOrders (orderID, siteID, finalPrice, oStatus,vehicleID)
 VALUES
-  (1, 1, 0, 4),  -- Order 1 tại Site 1
-  (1, 3, 0, 4),  -- Order 1 tại Site 3
-  (1, 5, 0, 4),  -- Order 1 tại Site 5
-  (2, 2, 0, 2),  -- Order 2 tại Site 2
-  (2, 4, 0, 1),  -- Order 2 tại Site 4
-  (2, 5, 0, 3),  -- Order 2 tại Site 5
-  (3, 1, 0, 5),  -- Order 3 tại Site 1
-  (3, 2, 0, 3),  -- Order 3 tại Site 2
-  (3, 4, 0, 2),  -- Order 3 tại Site 4
-  (4, 3, 0, 5),  -- Order 4 tại Site 3
-  (4, 5, 0, 4),  -- Order 4 tại Site 5
-  (5, 1, 0, 2),  -- Order 5 tại Site 1
-  (5, 3, 0, 5);  -- Order 5 tại Site 3
+  (1, 1, 0, 4,1),  -- Order 1 tại Site 1
+  (1, 3, 0, 4,2),  -- Order 1 tại Site 3
+  (1, 5, 0, 4,1),  -- Order 1 tại Site 5
+  (2, 2, 0, 2,2),  -- Order 2 tại Site 2
+  (2, 4, 0, 1,1),  -- Order 2 tại Site 4
+  (2, 5, 0, 3,1),  -- Order 2 tại Site 5
+  (3, 1, 0, 5,1),  -- Order 3 tại Site 1
+  (3, 2, 0, 3,2),  -- Order 3 tại Site 2
+  (3, 4, 0, 2,2),  -- Order 3 tại Site 4
+  (4, 3, 0, 5,1),  -- Order 4 tại Site 3
+  (4, 5, 0, 2,1),  -- Order 4 tại Site 5
+  (5, 1, 0, 2,1),  -- Order 5 tại Site 1
+  (5, 3, 0, 2,2);  -- Order 5 tại Site 3
+  
   INSERT INTO SiteOrderDetails (siteOrderID, productID, quantity)
   VALUES
     (1, 1, 2),   -- Order 1 tại Site 1, sản phẩm 1, số lượng 2
@@ -268,6 +273,8 @@ VALUES
     (13, 11, 5),  -- Order 13 tại Site 13, sản phẩm 11, số lượng 5
     (13, 12, 3);  -- Order 13 tại Site 13, sản phẩm 12, số lượng 3
 
+
+
 -- 1: Chờ xác nhận
 -- 2: Đang lấy hàng
 -- 3: Đang giao hàng
@@ -289,6 +296,53 @@ UPDATE SiteOrders
   JOIN Products ON SiteOrderDetails.productID = Products.ID
   WHERE SiteOrders.ID = SiteOrderDetails.siteOrderID
 );
+
+DELIMITER //
+
+CREATE TRIGGER after_siteorderdetails_insert_update
+AFTER INSERT ON SiteOrderDetails
+FOR EACH ROW
+BEGIN
+    UPDATE SiteOrders
+    SET finalPrice = (
+        SELECT SUM(Products.price * SiteOrderDetails.quantity)
+        FROM SiteOrderDetails
+        JOIN Products ON SiteOrderDetails.productID = Products.ID
+        WHERE SiteOrders.ID = SiteOrderDetails.siteOrderID
+    )
+    WHERE SiteOrders.ID = NEW.siteOrderID;
+END//
+
+CREATE TRIGGER after_siteorderdetails_update
+AFTER UPDATE ON SiteOrderDetails
+FOR EACH ROW
+BEGIN
+    UPDATE SiteOrders
+    SET finalPrice = (
+        SELECT SUM(Products.price * SiteOrderDetails.quantity)
+        FROM SiteOrderDetails
+        JOIN Products ON SiteOrderDetails.productID = Products.ID
+        WHERE SiteOrders.ID = NEW.siteOrderID
+    )
+    WHERE SiteOrders.ID = NEW.siteOrderID;
+END//
+
+CREATE TRIGGER after_siteorderdetails_delete
+AFTER DELETE ON SiteOrderDetails
+FOR EACH ROW
+BEGIN
+    UPDATE SiteOrders
+    SET finalPrice = (
+        SELECT SUM(Products.price * SiteOrderDetails.quantity)
+        FROM SiteOrderDetails
+        JOIN Products ON SiteOrderDetails.productID = Products.ID
+        WHERE SiteOrders.ID = OLD.siteOrderID
+    )
+    WHERE SiteOrders.ID = OLD.siteOrderID;
+END//
+
+DELIMITER ;
+
 
 UPDATE SiteOrderDetails sod
 JOIN Products p ON sod.productID = p.ID

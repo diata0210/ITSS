@@ -43,10 +43,6 @@ public class ReCreateOrder {
         this.ID = ID;
     }
 
-    public String getSName() {
-        return sName;
-    }
-
     public int getQuantity() {
         return quantity;
     }
@@ -54,4 +50,19 @@ public class ReCreateOrder {
         this.quantity = quantity;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public String getArrDate() {
+        return arrDate;
+    }
+
+    public String getSName() {
+        return sName;
+    }
+
+    public String getVehicle() {
+        return vehicle;
+    }
 }

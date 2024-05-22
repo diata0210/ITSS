@@ -110,12 +110,6 @@ public class OrderToSiteController implements Initializable {
             SiteOrder siteorder = siteOrderServiceImp.getSiteOrderById(table.getSelectionModel().getSelectedItem().getID());
             controller.loadData(siteorder);
         }
-
-//        } else {
-//            // Handle the case where no item is selected
-//            System.out.println("No item selected.");
-//        }
-
     }
 
 

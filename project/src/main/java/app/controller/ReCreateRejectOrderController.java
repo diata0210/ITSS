@@ -71,9 +71,6 @@ public class ReCreateRejectOrderController implements Initializable {
     private DatePicker deliverDate;
 
     @FXML
-    private TextField finalPrice;
-
-    @FXML
     private ComboBox<String> listProduct;
 
     @FXML
@@ -146,6 +143,7 @@ public class ReCreateRejectOrderController implements Initializable {
                     vehicelValue.getValue(),
                     arrivedDate.getValue().toString()
             );
+            System.out.println(listProduct.getValue());
             templist.add(table);
         }
         filterList.clear();
@@ -187,6 +185,15 @@ public class ReCreateRejectOrderController implements Initializable {
         pane.getChildren().clear();
         pane.getChildren().add(parent);
     }
+
+    @FXML
+    void back(MouseEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/project/OrderToSitePage.fxml"));
+        Parent parent = loader.load();
+        pane.getChildren().clear();
+        pane.getChildren().add(parent);
+    }
+
 
     @FXML
     void filterSite(ActionEvent event) {

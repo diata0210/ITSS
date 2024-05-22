@@ -24,13 +24,17 @@
 
             <Pane accessibleRole="BUTTON" layoutX="-2.0" maxHeight="-Infinity" prefHeight="96.0" prefWidth="655.0">
                <children>
-                  <HBox alignment="CENTER_LEFT" layoutX="5.0" layoutY="-2.0" prefHeight="100.0" prefWidth="386.0" spacing="10.0">
+                  <HBox alignment="CENTER_LEFT" layoutX="5.0" layoutY="-2.0" prefHeight="100.0" prefWidth="386.0" spacing="8.0">
                      <children>
-                        <ImageView fx:id="handleBack" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../img/back_2099190.png" />
-                           </image>
-                        </ImageView>
+                  <Button mnemonicParsing="false" onAction="#back" prefHeight="38.0" prefWidth="36.0" style="-fx-background-color: transparent;">
+                     <graphic>
+                              <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../img/back_2099190.png" />
+                                 </image>
+                              </ImageView>
+                     </graphic>
+                  </Button>
                         <Label prefHeight="40.0" prefWidth="266.0" text="Tạo lại đơn hàng hủy">
                            <font>
                               <Font size="28.0" />
@@ -205,16 +209,7 @@
                               <Button mnemonicParsing="false" onAction="#addAllOrder" prefHeight="32.0" prefWidth="130.0" text="Tạo đơn hàng" />
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER_LEFT" layoutX="516.0" prefHeight="63.0" prefWidth="142.0" spacing="10.0">
-                           <children>
-                              <Label text="Tổng">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <TextField fx:id="finalPrice" prefHeight="26.0" prefWidth="90.0" />
-                           </children>
-                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="516.0" prefHeight="63.0" prefWidth="142.0" spacing="10.0" />
                      </children>
                   </AnchorPane>
                </children>
