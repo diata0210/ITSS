@@ -26,9 +26,7 @@
     <jacoco.unit-tests.limit.branch-ratio>0%</jacoco.unit-tests.limit.branch-ratio>
     <jacoco.unit-tests.limit.class-complexity>20</jacoco.unit-tests.limit.class-complexity>
     <jacoco.unit-tests.limit.method-complexity>5</jacoco.unit-tests.limit.method-complexity>
-
   </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.openjfx</groupId>
@@ -45,7 +43,6 @@
       <artifactId>reflections</artifactId>
       <version>0.10.2</version>
     </dependency>
-
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>

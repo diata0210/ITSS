@@ -1,5 +1,4 @@
 package app.models;
-
 import java.math.BigDecimal;
 
 public class Product {
@@ -14,7 +13,7 @@ public class Product {
         this.type = type;
         this.price = price;
     }
-
+    
     public BigDecimal getPrice() {
         return price;
     }
@@ -22,7 +21,6 @@ public class Product {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-
     public int getId() {
         return id;
     }
@@ -35,11 +33,12 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
+
     public String getType() {
         return type;
     }
+
     public void setType(String type) {
         this.type = type;
     }
- 
 }

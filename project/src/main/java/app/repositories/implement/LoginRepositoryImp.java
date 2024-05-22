@@ -1,14 +1,7 @@
 package app.repositories.implement;
 
-import app.controller.LoginController;
 import app.db.DatabaseConnection;
 import app.repositories.LoginRepository;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

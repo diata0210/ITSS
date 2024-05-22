@@ -30,7 +30,7 @@
         </HBox>
         <HBox layoutX="31.0" layoutY="137.0" prefHeight="31.0" prefWidth="231.0" style="-fx-background-color: transparent; -fx-border-width: 0 0 2px 0; -fx-border-color: blue;">
           <children>
-            <TextField fx:id="paswordField" prefHeight="29.0" prefWidth="182.0" promptText="Passwod" style="-fx-background-color: transparent; -fx-border-width: 0;" />
+            <TextField fx:id="paswordField" prefHeight="29.0" prefWidth="182.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-width: 0;" />
           </children>
         </HBox>
         <Button layoutX="51.0" layoutY="241.0" mnemonicParsing="false" onAction="#onLogin" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: rgb(153, 255, 153); -fx-cursor: pointer; -fx-font-weight: bold;" text="LOGIN" />
