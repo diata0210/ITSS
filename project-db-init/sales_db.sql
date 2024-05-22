@@ -100,7 +100,6 @@ INSERT INTO Users (username, upassword, roles) VALUES
 ('AdmAnGiang', '123456', 3),
 ('AdmHaNoi', '123456', 3);
 
-
 -- 1: Bộ phận bán hàng
 -- 2: Bộ phận đặt hàng
 -- 3: Site
