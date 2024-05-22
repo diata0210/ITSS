@@ -121,7 +121,6 @@ public class WarehouseRepositoryImp implements WarehouseRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return siteOrder;
 
 

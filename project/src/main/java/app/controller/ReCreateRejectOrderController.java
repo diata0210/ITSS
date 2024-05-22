@@ -39,12 +39,12 @@ import java.util.stream.Collectors;
 
 public class ReCreateRejectOrderController implements Initializable {
 
-    SiteServiceImp siteServiceImp = new SiteServiceImp();
-    SiteRepository siteRepository = new SiteRepositoryImp();
-    ProductServiceImp productServiceImp = new ProductServiceImp();
-    ProductRepository productRepository = new ProductRepositoryImp();
-    OrderToSiteServiceImp siteOrderServiceImp = new OrderToSiteServiceImp();
-    OrderToSiteRepository orderToSiteRepository = new OrderToSiteRepositoryImp();
+    private SiteServiceImp siteServiceImp = new SiteServiceImp();
+    private SiteRepository siteRepository = new SiteRepositoryImp();
+    private ProductServiceImp productServiceImp = new ProductServiceImp();
+    private ProductRepository productRepository = new ProductRepositoryImp();
+    private OrderToSiteServiceImp siteOrderServiceImp = new OrderToSiteServiceImp();
+    private OrderToSiteRepository orderToSiteRepository = new OrderToSiteRepositoryImp();
 
     private SiteOrder siteOrder;
     private List<SiteOrderDetail> siteOrderDetails;

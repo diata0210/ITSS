@@ -121,17 +121,37 @@ public class SiteRepositoryImp implements SiteRepository {
         }
         return productSites;
     };
-    @Override
     public void updateQuantityProductSite(int siteId, int productId, int quantity) {
-        String query = "UPDATE ProductSites SET quantity = quantity - ? WHERE siteID = ? AND productID = ?";
-        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, quantity);
-            preparedStatement.setInt(2, siteId);
-            preparedStatement.setInt(3, productId);
+        String selectQuery = "SELECT quantity FROM ProductSites WHERE siteID = ? AND productID = ?";
+        String updateQuery = "UPDATE ProductSites SET quantity = quantity - ? WHERE siteID = ? AND productID = ?";
 
-            preparedStatement.executeUpdate();
+        try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery);
+             PreparedStatement updateStatement = connection.prepareStatement(updateQuery)) {
+
+            // Truy vấn số lượng hiện tại
+            selectStatement.setInt(1, siteId);
+            selectStatement.setInt(2, productId);
+            ResultSet resultSet = selectStatement.executeQuery();
+
+            if (!resultSet.next()) {
+                throw new RuntimeException("Non-existing site ID or product ID");
+            }
+
+            int currentQuantity = resultSet.getInt("quantity");
+
+            if (quantity > currentQuantity) {
+                throw new RuntimeException("Quantity to subtract exceeds current quantity");
+            }
+
+            // Thực hiện cập nhật số lượng
+            updateStatement.setInt(1, quantity);
+            updateStatement.setInt(2, siteId);
+            updateStatement.setInt(3, productId);
+            updateStatement.executeUpdate();
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
 }
