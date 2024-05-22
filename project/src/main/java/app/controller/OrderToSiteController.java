@@ -59,8 +59,17 @@ public class OrderToSiteController implements Initializable {
     private TableView<SiteOrder> table;
 
     @FXML
-    void addOrder(ActionEvent event) {
+    void addOrder(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/project/CreateOrder.fxml"));
+            Parent parent = loader.load();
+            pane.getChildren().clear();
+            pane.getChildren().add(parent);
 
+            CreateSiteOrderController controller = new CreateSiteOrderController();
+            loader.setController(controller);
+            
+
+        
     }
 
     private String statusValue;
