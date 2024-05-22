@@ -226,9 +226,9 @@ VALUES
   (3, 2, 0, 3),  -- Order 3 tại Site 2
   (3, 4, 0, 2),  -- Order 3 tại Site 4
   (4, 3, 0, 5),  -- Order 4 tại Site 3
-  (4, 5, 0, 4),  -- Order 4 tại Site 5
+  (4, 5, 0, 2),  -- Order 4 tại Site 5
   (5, 1, 0, 2),  -- Order 5 tại Site 1
-  (5, 3, 0, 5);  -- Order 5 tại Site 3
+  (5, 3, 0, 2);  -- Order 5 tại Site 3
   INSERT INTO SiteOrderDetails (siteOrderID, productID, quantity)
   VALUES
     (1, 1, 2),   -- Order 1 tại Site 1, sản phẩm 1, số lượng 2
@@ -289,6 +289,53 @@ UPDATE SiteOrders
   JOIN Products ON SiteOrderDetails.productID = Products.ID
   WHERE SiteOrders.ID = SiteOrderDetails.siteOrderID
 );
+
+DELIMITER //
+
+CREATE TRIGGER after_siteorderdetails_insert_update
+AFTER INSERT ON SiteOrderDetails
+FOR EACH ROW
+BEGIN
+    UPDATE SiteOrders
+    SET finalPrice = (
+        SELECT SUM(Products.price * SiteOrderDetails.quantity)
+        FROM SiteOrderDetails
+        JOIN Products ON SiteOrderDetails.productID = Products.ID
+        WHERE SiteOrders.ID = SiteOrderDetails.siteOrderID
+    )
+    WHERE SiteOrders.ID = NEW.siteOrderID;
+END//
+
+CREATE TRIGGER after_siteorderdetails_update
+AFTER UPDATE ON SiteOrderDetails
+FOR EACH ROW
+BEGIN
+    UPDATE SiteOrders
+    SET finalPrice = (
+        SELECT SUM(Products.price * SiteOrderDetails.quantity)
+        FROM SiteOrderDetails
+        JOIN Products ON SiteOrderDetails.productID = Products.ID
+        WHERE SiteOrders.ID = NEW.siteOrderID
+    )
+    WHERE SiteOrders.ID = NEW.siteOrderID;
+END//
+
+CREATE TRIGGER after_siteorderdetails_delete
+AFTER DELETE ON SiteOrderDetails
+FOR EACH ROW
+BEGIN
+    UPDATE SiteOrders
+    SET finalPrice = (
+        SELECT SUM(Products.price * SiteOrderDetails.quantity)
+        FROM SiteOrderDetails
+        JOIN Products ON SiteOrderDetails.productID = Products.ID
+        WHERE SiteOrders.ID = OLD.siteOrderID
+    )
+    WHERE SiteOrders.ID = OLD.siteOrderID;
+END//
+
+DELIMITER ;
+
 
 UPDATE SiteOrderDetails sod
 JOIN Products p ON sod.productID = p.ID

@@ -18,10 +18,8 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class DetailOrderController implements Initializable {
+public class DetailOrderController {
 
 
     private ObservableList<SiteOrderDetail> orderDetails;
@@ -49,9 +47,6 @@ public class DetailOrderController implements Initializable {
     private TableColumn<SiteOrderDetail, String> status;
 
     @FXML
-    private Button ReCreateOrder;
-
-    @FXML
     private TextField finalPrice;
 
 
@@ -66,17 +61,15 @@ public class DetailOrderController implements Initializable {
 
     @FXML
     void filterByName(ActionEvent event) {
-
-    }
-
-    @FXML
-    void filterByStatus(ActionEvent event) {
-
-    }
-
-    @FXML
-    void getItem(MouseEvent event) {
-
+        String filterNameValue = inputValue.getText().toLowerCase();
+        filteredOrders.setPredicate(siteOrderDetail -> {
+            // If filter text is empty, display all orders
+            if (filterNameValue == null || filterNameValue.isEmpty()) {
+                return true;
+            }
+            // Compare site order name of every site order with filterNameValue
+            return siteOrderDetail.getPName().toLowerCase().contains(filterNameValue);
+        });
     }
 
     private SiteOrder orders;
@@ -117,16 +110,12 @@ public class DetailOrderController implements Initializable {
     public void loadData(SiteOrder siteOrder){
         this.orders = siteOrder;
         orderDetails = FXCollections.observableArrayList(siteOrder.getSiteOrderDetails());
+        filteredOrders = new FilteredList<>(orderDetails, p -> true);
         initializeTable();
-        table.setItems(orderDetails);
+        table.setItems(filteredOrders);
         orderCodeValue.setText(String.valueOf(siteOrder.getID()));
         statusValue.setText(siteOrder.getOStatus());
         siteValue.setText(siteOrder.getSiteName());
         finalPrice.setText(String.valueOf(siteOrder.getFinalPrice()));
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
     }
 }
