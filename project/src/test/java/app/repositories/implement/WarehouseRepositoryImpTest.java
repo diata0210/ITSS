@@ -12,7 +12,7 @@ public class WarehouseRepositoryImpTest {
 
     //    Với các điều kiện để update thành công
     @Test
-    void testUpdateQuantityProductSite_Success() {
+    void testUpdateActualQuantity_Success() {
         int siteOrderId = 12;
         int productId = 7;
         int checked =5;
@@ -30,7 +30,7 @@ public class WarehouseRepositoryImpTest {
         assertEquals(expectedQuantity, initialQuantityAfterUpdate);
     }
     //    Với các điều kiện để update thất bại
-    void testUpdateQuantityProductSite_NonExistingSite() {
+    void testUpdateActualQuantity_Fail() {
         // Arrange
         int orderSiteId = 12;
         int productId = 7;
