@@ -1,10 +1,11 @@
 package app.models;
+import java.math.BigDecimal;
 
 public class Product {
     private int id;
     private String name;
     private String unit;
-    private int price;
+    private BigDecimal price;
     public String getUnit() {
         return unit;
     }
@@ -23,10 +24,11 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
 }

@@ -1,10 +1,11 @@
 package app.models;
+import java.math.BigDecimal;
 
 public class ProductSite {
     private int productId;
     private int siteId;
     private String name;
-    private int price;
+    private BigDecimal price;
     private int quantity;
     private String unit;
     public String getUnit() {
@@ -31,16 +32,16 @@ public class ProductSite {
     public void setName(String name) {
         this.name = name;
     }
-    public int getPrice() {
-        return price;
-    }
-    public void setPrice(int price) {
-        this.price = price;
-    }
     public int getQuantity() {
         return quantity;
     }
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+    public BigDecimal getPrice() {
+        return price;
+    }
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

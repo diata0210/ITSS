@@ -14,12 +14,13 @@ import javafx.fxml.Initializable;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
+import java.math.BigDecimal;
 import app.models.ProductSite;
+import app.repositories.implement.SiteHomePageRepositoryImp;
 import app.repositories.SiteHomePageRepository;
 public class SiteHomePageController implements Initializable{
     private int userId;
-    private SiteHomePageRepository repository = new SiteHomePageRepository();
+    private SiteHomePageRepository repository = new SiteHomePageRepositoryImp();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         repository.loadData(userId);
@@ -70,7 +71,7 @@ public class SiteHomePageController implements Initializable{
     private TableColumn<ProductSite, String> nameCol;
 
     @FXML
-    private TableColumn<ProductSite, Integer> priceCol;
+    private TableColumn<ProductSite, BigDecimal> priceCol;
 
     @FXML
     private TableColumn<ProductSite, Integer> quantityCol;

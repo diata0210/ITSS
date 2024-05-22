@@ -2,6 +2,7 @@ package app.controller;
 
 import java.io.IOException;
 
+import app.repositories.implement.LoginRepositoryImp;
 import app.repositories.LoginRepository;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 public class LoginController {
-    LoginRepository login = new LoginRepository();
+    LoginRepository login = new LoginRepositoryImp();
     @FXML
     private TextField paswordField;
 

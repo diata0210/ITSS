@@ -21,11 +21,13 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.converter.IntegerStringConverter;
-import app.repositories.AddProductsRepository;
 import app.models.ProductSite;
+import app.repositories.implement.AddProductsRepositoryImp;
+import app.repositories.AddProductsRepository;
+import java.math.BigDecimal;
 public class AddProductsController implements Initializable {
     private int siteId;
-    private AddProductsRepository repository = new AddProductsRepository();
+    private AddProductsRepository repository = new AddProductsRepositoryImp();
     private ObservableList<ProductSite> Products;
     @FXML
     private TableView<ProductSite> table;
@@ -37,7 +39,7 @@ public class AddProductsController implements Initializable {
     private TableColumn<ProductSite, String> nameCol;
 
     @FXML
-    private TableColumn<ProductSite, Integer> priceCol;
+    private TableColumn<ProductSite, BigDecimal> priceCol;
 
     @FXML
     private TableColumn<ProductSite, Integer> quantityCol; 
