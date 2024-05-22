@@ -60,7 +60,8 @@ public class WarehouseRepositoryImp implements WarehouseRepository {
                     siteOrder.setArrivalDate(arrivalDate);
                 }
                 siteOrder.setOStatus(resultSet.getInt("oStatus"));
-
+                siteOrder.setActualValue(resultSet.getBigDecimal("actualValue"));
+                System.out.println(siteOrder.getActualValue());
                 siteOrder.setVehicleID(resultSet.getInt("vehicleID"));
 
                 int siteOrderID = resultSet.getInt("ID");
@@ -82,14 +83,14 @@ public class WarehouseRepositoryImp implements WarehouseRepository {
     public List <WHCheckTable> getSiteOrderDetail(int siteOrderID) {
 
         List<WHCheckTable> siteOrderDetails = new ArrayList<>();
-        String query = "SELECT p.ID, p.pname , sod.finalPrice, sod.quantity FROM SiteOrderDetails sod " +
+        String query = "SELECT p.ID, p.pname , p.price as price, sod.quantity FROM SiteOrderDetails sod " +
                 "JOIN Products p ON sod.productID = p.ID " +
                 "WHERE sod.siteOrderID = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, siteOrderID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                WHCheckTable siteOrderDetail = new WHCheckTable(resultSet.getInt(("ID")),resultSet.getString("pname"),resultSet.getBigDecimal(("finalPrice")),resultSet.getInt(("quantity")));
+                WHCheckTable siteOrderDetail = new WHCheckTable(resultSet.getInt(("ID")),resultSet.getString("pname"),resultSet.getBigDecimal(("price")),resultSet.getInt(("quantity")));
 
                 siteOrderDetails.add(siteOrderDetail);
 
@@ -130,14 +131,14 @@ public class WarehouseRepositoryImp implements WarehouseRepository {
     public List <WHCheckedTable> getSiteOrderDetailChecked(int siteOrderID) {
 
         List<WHCheckedTable> siteOrderDetails = new ArrayList<>();
-        String query = "SELECT p.ID, p.pname , sod.finalPrice, sod.quantity, sod.actualQuantity  FROM SiteOrderDetails sod " +
+        String query = "SELECT p.ID, p.pname , p.price, sod.quantity, sod.actualQuantity  FROM SiteOrderDetails sod " +
                 "JOIN Products p ON sod.productID = p.ID " +
                 "WHERE sod.siteOrderID = ?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, siteOrderID);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                WHCheckedTable siteOrderDetail = new WHCheckedTable(resultSet.getInt(("ID")),resultSet.getString("pname"),resultSet.getBigDecimal(("finalPrice")),resultSet.getInt(("quantity")),resultSet.getInt(("actualQuantity")));
+                WHCheckedTable siteOrderDetail = new WHCheckedTable(resultSet.getInt(("ID")),resultSet.getString("pname"),resultSet.getBigDecimal(("price")),resultSet.getInt(("quantity")),resultSet.getInt(("actualQuantity")));
 
                 siteOrderDetails.add(siteOrderDetail);
 
@@ -150,7 +151,7 @@ public class WarehouseRepositoryImp implements WarehouseRepository {
     @Override
     public SiteOrder getByIdChecked(int id) {
         SiteOrder siteOrder = new SiteOrder();
-        String query = "SELECT so.ID, s.sname, so.finalPrice, so.oStatus " +
+        String query = "SELECT so.ID, s.sname, so.finalPrice,so.actualValue, so.oStatus " +
                 "FROM SiteOrders so " +
                 "JOIN Sites s ON so.siteID = s.ID " +
                 "WHERE so.ID = ?";
@@ -163,6 +164,7 @@ public class WarehouseRepositoryImp implements WarehouseRepository {
                 siteOrder.setSiteName(resultSet.getString("sname"));
                 siteOrder.setFinalPrice(resultSet.getBigDecimal("finalPrice"));
                 siteOrder.setOStatus(resultSet.getInt("oStatus"));
+                siteOrder.setActualValue(resultSet.getBigDecimal("actualValue"));
                 List<WHCheckedTable> WHCheckeds = getSiteOrderDetailChecked(id);
                 siteOrder.setWHCheckeds(WHCheckeds);
             }
@@ -215,5 +217,9 @@ public void updateActualQuantity(int siteOrderID, int productID, int checked) {
         }catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setConnection(Connection mockConnection) {
+        this.connection = connection;
     }
 }

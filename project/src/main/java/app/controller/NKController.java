@@ -8,6 +8,7 @@ import app.repositories.implement.WarehouseRepositoryImp;
 import app.services.WarehouseServiceImp;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -108,8 +109,11 @@ public class NKController implements Initializable {
                 Document document = new Document();
                 PdfWriter.getInstance(document, new FileOutputStream(pdfFile));
                 document.open();
+                Paragraph title = new Paragraph("PHIEU NHAP KHO");
+                title.setAlignment(Element.ALIGN_CENTER);
+                document.add(title);
 
-                document.add(new Paragraph("Phiếu Kiểm Kho"));
+
 
                 PdfPTable pdfTable = new PdfPTable(6); // 6 cột tương ứng với các cột trong TableView
                 pdfTable.addCell("STT");
@@ -118,6 +122,11 @@ public class NKController implements Initializable {
                 pdfTable.addCell("Quantity");
                 pdfTable.addCell("Price");
                 pdfTable.addCell("Checked");
+
+
+
+
+
 
                 for (WHCheckedTable item : table.getItems()) {
                     pdfTable.addCell(String.valueOf(table.getItems().indexOf(item) + 1));
@@ -129,6 +138,8 @@ public class NKController implements Initializable {
                 }
 
                 document.add(pdfTable);
+                document.add(new Paragraph("Gia tri thuc te:"+ this.siteOrder.getActualValue()));
+                document.add(new Paragraph("Chu ky cua nguoi nhap kho"));
                 document.close();
 
                 System.out.println("PDF đã được lưu thành công tại: " + pdfFile.getAbsolutePath());
@@ -138,46 +149,7 @@ public class NKController implements Initializable {
         }
     }
 
-    private void saveDataAndExportPDF() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Save PDF");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF Files", "*.pdf"));
-        File file = fileChooser.showSaveDialog(null);
 
-        if (file != null) {
-            try {
-                Document document = new Document();
-                PdfWriter.getInstance(document, new FileOutputStream(file));
-                document.open();
-
-                document.add(new Paragraph("Phiếu Kiểm Kho"));
-
-                PdfPTable pdfTable = new PdfPTable(6); // 6 cột tương ứng với các cột trong TableView
-                pdfTable.addCell("STT");
-                pdfTable.addCell("Product ID");
-                pdfTable.addCell("Product Name");
-                pdfTable.addCell("Quantity");
-                pdfTable.addCell("Price");
-                pdfTable.addCell("Checked");
-
-                for (WHCheckedTable item : table.getItems()) {
-                    pdfTable.addCell(String.valueOf(table.getItems().indexOf(item) + 1));
-                    pdfTable.addCell(String.valueOf(item.getProductID()));
-                    pdfTable.addCell(item.getProductName());
-                    pdfTable.addCell(String.valueOf(item.getQuantity()));
-                    pdfTable.addCell(item.getPrice().toString());
-                    pdfTable.addCell(String.valueOf(item.getChecked()));
-                }
-
-                document.add(pdfTable);
-                document.close();
-
-                System.out.println("PDF đã được lưu thành công tại: " + file.getAbsolutePath());
-            } catch (DocumentException | IOException e) {
-                System.out.println("Không thể lưu file PDF: " + e.getMessage());
-            }
-        }
-    }
     public void initializeTable() {
         stt.setCellValueFactory(column ->
                 new ReadOnlyObjectWrapper<>(table.getItems().indexOf(column.getValue()) + 1)

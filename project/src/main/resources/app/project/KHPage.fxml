@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import javafx.scene.text.Text?>
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="665.0" style="-fx-border-width: 0 0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.WHController">
+<AnchorPane fx:id = "pane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="665.0" style="-fx-border-width: 0 0;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.WHController">
    <children>
 
 
@@ -35,10 +35,10 @@
                 <TableColumn fx:id="productID" prefWidth="46.5" text="PID" />
                   <TableColumn fx:id="productName" prefWidth="78.5" text="Name" />
                  <TableColumn fx:id="price" prefWidth="78.0" text="Price" />
-                  <TableColumn fx:id="checked" prefWidth="77.0" text="quantity" />
-                  <TableColumn fx:id="deviated" prefWidth="94.0" text="Checked" />
-                 <TableColumn fx:id="deviationValue" prefWidth="75.5" text="Deviated" />
-                  <TableColumn fx:id="quantity" prefWidth="105.5" text="Deviation" />
+                  <TableColumn fx:id="quantity" prefWidth="77.0" text="quantity" />
+                  <TableColumn fx:id="checked" prefWidth="94.0" text="Checked" />
+                 <TableColumn fx:id="deviated" prefWidth="75.5" text="Deviated" />
+                  <TableColumn fx:id="deviationValue" prefWidth="105.5" text="Deviation" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

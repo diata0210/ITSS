@@ -11,14 +11,15 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
 import java.math.BigDecimal;
@@ -62,27 +63,43 @@ public class WHController implements Initializable {
     private TableColumn<WHCheckTable, BigDecimal> deviationValue;
 
     @FXML
+    private AnchorPane pane;
+    private void loadScreen(String fxml) {
+        try {
+            if (pane != null) {
+                pane.getChildren().clear();
+                pane.getChildren().add(FXMLLoader.load(getClass().getResource(fxml)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @FXML
     void confirm(ActionEvent event) {
         LocalDateTime now = LocalDateTime.now();
         int orderStatus = 4; // Trạng thái đơn hàng sau khi xác nhận
 
         int siteOrderID = this.siteOrder.getID(); // ID của đơn hàng
-        BigDecimal actualValue = this.siteOrder.getActualValue();
+        BigDecimal actualValue = BigDecimal.ZERO;
         for (WHCheckTable item : orderDetails) {
 
+            BigDecimal itemTotal = item.getPrice().multiply(BigDecimal.valueOf(item.getChecked()));
+            actualValue = actualValue.add(itemTotal);
 
             warehouseServiceImp.updateActualQuantity(siteOrderID, item.getProductID(), item.getChecked());
         }
 
         // Cập nhật trạng thái đơn hàng sau khi tất cả các sản phẩm đã được cập nhật
         try {
-            BigDecimal t = new BigDecimal(1000);
-            warehouseServiceImp.updateSiteOrder(siteOrderID, now,t,orderStatus);
+            System.out.println(siteOrder.getActualValue());
+            warehouseServiceImp.updateSiteOrder(siteOrderID, now,actualValue,orderStatus);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
 
-
+        loadScreen("/app/project/DSDHPage.fxml");
     }
     @FXML
     private TextField finalPrice;

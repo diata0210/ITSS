@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseConnection {
-    private static final String JDBC_URL = "jdbc:mysql://localhost:3306/sales_db?useSSL=false";
+    private static final String JDBC_URL = "jdbc:mysql://localhost:3309/sales_db?useSSL=false";
     private static final String USERNAME = "root";
     private static final String PASSWORD = null;
 

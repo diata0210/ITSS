@@ -20,7 +20,7 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <Text fill="WHITE" layoutX="61.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tuấn Đần">
+                  <Text fill="WHITE" layoutX="61.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trần Phúc">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -28,7 +28,7 @@
                   <Text fill="WHITE" layoutX="31.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-border-width: 0 0 3px;" text="Bộ phận quản lý kho" />
                </children>
             </Pane>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#loadHome" prefHeight="51.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-cursor: pointer;" text="Trang chủ" textFill="#00ff11">
+            <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#loadHome" prefHeight="51.0" prefWidth="200.0" style="-fx-background-color: transparent; -fx-cursor: pointer;" text="Trang chủ" textFill="WHITE">
                <font>
                   <Font size="14.0" />
                </font>

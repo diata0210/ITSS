@@ -3,9 +3,13 @@ package app.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 
-public class WHLayoutController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class WHLayoutController implements Initializable {
 
     @FXML
     private AnchorPane pane;
@@ -18,6 +22,11 @@ public class WHLayoutController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        loadScreen("/app/project/HomePage.fxml");
     }
 
     @FXML
