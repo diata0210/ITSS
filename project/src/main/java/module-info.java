@@ -1,9 +1,11 @@
 module app.project {
     requires javafx.controls;
     requires javafx.fxml;
+
     requires transitive javafx.graphics;
     requires org.reflections;
     requires java.sql;
+    requires itextpdf;
 
     opens app.models to javafx.base;
 

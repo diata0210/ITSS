@@ -44,7 +44,15 @@ public class LoginController implements Initializable {
         String password = paswordField.getText();
         int role = loginServiceImp.getRole(username, password);
         if(role == 4){
-
+            try {
+                FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("/app/project/WHLayout.fxml"));
+                Parent root = loader.load();
+                Stage homeStage = new Stage();
+                homeStage.setScene(new Scene(root));
+                homeStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }else if(role == 2){
             try {
                 FXMLLoader loader = new FXMLLoader(LoginController.class.getResource("/app/project/Layout.fxml"));
