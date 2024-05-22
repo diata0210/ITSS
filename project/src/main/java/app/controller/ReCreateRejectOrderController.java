@@ -178,9 +178,7 @@ public class ReCreateRejectOrderController implements Initializable {
             }
             createSiteOrder.getQuantities().add(item.getQuantity());
         }
-        System.out.println(createSiteOrder.getSiteIDs());
-        System.out.println(createSiteOrder.getProductIDs());
-        System.out.println(createSiteOrder.getQuantities());
+
         siteOrderServiceImp.createOrder(createSiteOrder);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/project/OrderToSitePage.fxml"));
         Parent parent = loader.load();
