@@ -1,10 +1,12 @@
 package app.models;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class SiteOrder {
     private int ID;
+    private int siteID;
     private String siteName;
     public BigDecimal finalPrice;
     private String oStatus;
@@ -12,7 +14,12 @@ public class SiteOrder {
     private String deliveryDate;
     private String sendDate;
     private int sellOrderID;
+    private BigDecimal actualValue;
+    private LocalDateTime arrivalDate;
+    private String vehicleID ;
 
+    private List<WHCheckTable> WHChecks;
+    private List<WHCheckedTable> WHCheckeds;
     public  SiteOrder(){}
 
     public SiteOrder(String site,BigDecimal finalPrice, String status, int ID){
@@ -21,6 +28,63 @@ public class SiteOrder {
         this.oStatus = status;
         this.ID = ID;
     }
+
+    public List<WHCheckedTable> getWHCheckeds() {
+        return WHCheckeds;
+    }
+
+    public void setWHCheckeds(List<WHCheckedTable> WHCheckeds) {
+        this.WHCheckeds = WHCheckeds;
+    }
+
+    public BigDecimal getActualValue() {
+        return actualValue;
+    }
+
+    public void setActualValue(BigDecimal actualValue) {
+        this.actualValue = actualValue;
+    }
+
+    public LocalDateTime getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public void setArrivalDate(LocalDateTime arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+
+    public String getVehicleID() {
+        return vehicleID;
+    }
+
+    public void setVehicleID(int vehicleId) {
+        if(vehicleId == 1){
+            this.vehicleID = "Tàu";
+        } else if(vehicleId == 2) {
+            this.vehicleID = "May bay";
+        }
+    }
+
+    public int getSiteID() {
+        return siteID;
+    }
+
+    public void setSiteID(int siteID) {
+        this.siteID = siteID;
+    }
+
+    public List<WHCheckTable> getWHChecks() {
+        return WHChecks;
+    }
+
+    public void setWHChecks(List<WHCheckTable> WHChecks) {
+        this.WHChecks = WHChecks;
+    }
+
+    public void setVehicleID(String vehicleID) {
+        this.vehicleID = vehicleID;
+    }
+
     public int getSellOrderID() {
         return sellOrderID;
     }
