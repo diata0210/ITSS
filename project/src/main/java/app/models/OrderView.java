@@ -14,8 +14,8 @@ public class OrderView {
     private StringProperty arrDate = new SimpleStringProperty();
     private StringProperty delete = new SimpleStringProperty();
 
-    public StringProperty getDelete() {
-        return delete;
+    public String getDelete() {
+        return delete.get();
     }
 
     public void setDelete(String delete) {
