@@ -192,6 +192,7 @@ public class OrderToSiteRepositoryImp implements OrderToSiteRepository {
                         throw new SQLException("Failed to get generated SiteOrder ID.");
                     }
 
+                    // Cập nhật giá trị siteID trước đó
                     previousSiteID = siteID;
                 }
 

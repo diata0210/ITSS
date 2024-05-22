@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 
 import app.models.CreateSiteOrder;
 import app.models.OrderView;
+import app.models.ReCreateOrder;
 import app.models.SellOrderDetail;
 import app.models.SellOrder;
 import app.models.Site;
@@ -187,6 +188,14 @@ public class CreateSiteOrderController implements Initializable {
         if(siteId != 0 && productID != 0  ){
             quantityStore.setText(String.valueOf(siteServiceImp.getQuantityInSite(siteId,productID))); //using pid to check product available in site
         }
+        filterList.clear();
+        filterList.addAll(templist.stream()
+                .filter(temp -> temp.getSiteOrderDetails().stream().anyMatch(temps -> temps.getPName().equals(productValue.getText())))
+                .collect(Collectors.toList()));
+        filterView.clear();
+        filterView.addAll(orderView.stream()
+                .filter(temp -> temp.getProductName().equals(productValue.getText()))
+                .collect(Collectors.toList()));
     }
 
     @FXML
@@ -313,6 +322,14 @@ public class CreateSiteOrderController implements Initializable {
         filterView.addAll(orderView.stream()
                 .filter(temp -> temp.getProductName().equals(productValue.getText()))
                 .collect(Collectors.toList()));
+                 System.out.println("///////////////////////////////////////////////////////////////");
+        BigDecimal total = new BigDecimal(0);
+        for (OrderView item : orderView){
+            total = total.add(item.getPrice());
+            System.out.println("added: " + item.getPrice().toString());
+            System.out.println("total: " + total.toString());
+        }
+        finalPrice.setText(total.toString());
     }
 
     @FXML
@@ -332,15 +349,28 @@ public class CreateSiteOrderController implements Initializable {
 
         //chon site, sau do chon tung product trong site dc dat, sau do cap nhat trong kho cua site
 
-        for (SiteOrder item : templist) {          //we take all order in temp list, in this, i assume we only work with site order, sell order is done
-            createSiteOrder.getSiteIDs().add(item.getID()); //get the site id first, we put it in permutation order (site,product) and put it in the creatSiteOrder model/form
-            //for example: site1,product1,10; site1,product2,20;...;siten,productn,0;
-            siteOrderDetails = item.getSiteOrderDetails();
-            for (SiteOrderDetail orderDetail : siteOrderDetails){
-                createSiteOrder.getProductIDs().add(orderDetail.getPID()); //add productID to the createSiteOrder model/form
-                siteServiceImp.updateQuantityInProductSite(item.getID(), orderDetail.getPID() , orderDetail.getQuantity());
-                createSiteOrder.getQuantities().add(orderDetail.getQuantity());
+        // for (SiteOrder item : templist) {          //we take all order in temp list, in this, i assume we only work with site order, sell order is done
+        //     createSiteOrder.getSiteIDs().add(item.getID()); //get the site id first, we put it in permutation order (site,product) and put it in the creatSiteOrder model/form
+        //     //for example: site1,product1,10; site1,product2,20;...;siten,productn,0;
+        //     siteOrderDetails = item.getSiteOrderDetails();
+        //     for (SiteOrderDetail orderDetail : siteOrderDetails){
+        //         createSiteOrder.getProductIDs().add(orderDetail.getPID()); //add productID to the createSiteOrder model/form
+        //         siteServiceImp.updateQuantityInProductSite(item.getID(), orderDetail.getPID() , orderDetail.getQuantity());
+        //         createSiteOrder.getQuantities().add(orderDetail.getQuantity());
+        //     }
+        // }
+
+        // OrderToSiteServiceImp.createOrder(createSiteOrder);
+        for (OrderView item : orderView) {
+            createSiteOrder.getSiteIDs().add(item.getID());
+            for (SellOrderDetail orderDetail : sellOrderDetails) {
+                if (orderDetail.getPName().equals(item.getProductName())) {
+                    createSiteOrder.getProductIDs().add(orderDetail.getProductID());
+                    siteServiceImp.updateQuantityInProductSite(item.getID(), orderDetail.getProductID(), item.getQuantity());
+                    break;
+                }
             }
+            createSiteOrder.getQuantities().add(item.getQuantity());
         }
 
         OrderToSiteServiceImp.createOrder(createSiteOrder);
