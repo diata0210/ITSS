@@ -3,7 +3,14 @@ package app.models;
 public class Product {
     private int id;
     private String name;
-    private String type;
+    private String unit;
+    private int price;
+    public String getUnit() {
+        return unit;
+    }
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
     public int getId() {
         return id;
     }
@@ -16,11 +23,10 @@ public class Product {
     public void setName(String name) {
         this.name = name;
     }
-    public String getType() {
-        return type;
+    public int getPrice() {
+        return price;
     }
-    public void setType(String type) {
-        this.type = type;
+    public void setPrice(int price) {
+        this.price = price;
     }
- 
 }

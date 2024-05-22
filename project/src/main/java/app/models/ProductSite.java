@@ -1,29 +1,29 @@
 package app.models;
 
 public class ProductSite {
-    private int id;
-    private int siteID;
-    private int productID;
+    private int productId;
+    private int siteId;
     private String name;
     private int price;
     private int quantity;
-    public int getId() {
-        return id;
+    private String unit;
+    public String getUnit() {
+        return unit;
     }
-    public void setId(int id) {
-        this.id = id;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
-    public int getSiteID() {
-        return siteID;
+    public int getProductId() {
+        return productId;
     }
-    public void setSiteID(int siteID) {
-        this.siteID = siteID;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
-    public int getProductID() {
-        return productID;
+    public int getSiteId() {
+        return siteId;
     }
-    public void setProductID(int productID) {
-        this.productID = productID;
+    public void setSiteId(int siteId) {
+        this.siteId = siteId;
     }
     public String getName() {
         return name;
@@ -43,5 +43,4 @@ public class ProductSite {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-    
 }

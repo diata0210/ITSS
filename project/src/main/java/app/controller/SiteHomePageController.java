@@ -1,38 +1,47 @@
 package app.controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.control.TableView;
+import javafx.scene.Parent;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.fxml.Initializable;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import app.models.SiteHomePageModel;
+
 import app.models.ProductSite;
+import app.repositories.SiteHomePageRepository;
 public class SiteHomePageController implements Initializable{
     private int userId;
-    private SiteHomePageModel model = new SiteHomePageModel();
+    private SiteHomePageRepository repository = new SiteHomePageRepository();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        model.loadData(userId);
+        repository.loadData(userId);
         setData();
     }
     private void setData(){
-        name.setText(model.getName());
-        code.setText("" + model.getCode());
-        address.setText(model.getAddress());
-        airDelivery.setText("" + model.getAirDelivery());
-        shipDelivery.setText("" + model.getShipDelivery());
-        table.setItems(model.getSiteProducts());
-        codeCol.setCellValueFactory(new PropertyValueFactory<>("productID"));
+        name.setText(repository.getName());
+        code.setText("" + repository.getCode());
+        address.setText(repository.getAddress());
+        airDelivery.setText("" + repository.getAirDelivery());
+        shipDelivery.setText("" + repository.getShipDelivery());
+        table.setItems(repository.getSiteProducts());
+        codeCol.setCellValueFactory(new PropertyValueFactory<>("productId"));
         nameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
         quantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        unitCol.setCellValueFactory(new PropertyValueFactory<>("unit"));
     }
+    private Parent oldContent;
+    @FXML
+    private Pane centerPane;
+
     @FXML
     private Text address;
 
@@ -67,24 +76,34 @@ public class SiteHomePageController implements Initializable{
     private TableColumn<ProductSite, Integer> quantityCol;
 
     @FXML
-    void pressedAddProducts(ActionEvent event) {
-
+    private TableColumn<ProductSite, String> unitCol;
+    @FXML
+    void pressedAddProducts(MouseEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/app/project/AddProducts.fxml"));
+            Parent newContent = loader.load();
+            oldContent = (Pane)centerPane.getChildren().get(0);
+            centerPane.getChildren().clear();
+            centerPane.getChildren().add(newContent);
+            AddProductsController controller = loader.getController();
+            controller.setSiteId(repository.getCode());
+            controller.initialize(null, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    void pressedEdit(MouseEvent event) {
-
+    void pressedHome(MouseEvent event) {
+        if (oldContent != null) {
+            centerPane.getChildren().clear();
+            centerPane.getChildren().add(oldContent);
+            repository.loadData(userId);
+            setData();
+        }
+        
     }
 
-    @FXML
-    void pressedHome(ActionEvent event) {
-
-    }
-
-    @FXML
-    void pressedSearch(MouseEvent event) {
-
-    }
     public void setUserId(int userId){
         this.userId = userId;
     }

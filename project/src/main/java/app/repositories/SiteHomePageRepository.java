@@ -1,14 +1,15 @@
-package app.models;
+package app.repositories;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import app.db.DatabaseConnection;
+import app.models.ProductSite;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-public class SiteHomePageModel{
+public class SiteHomePageRepository{
     private Connection connection = DatabaseConnection.getConnection();
     private String name;
     private int code;
@@ -55,7 +56,8 @@ public class SiteHomePageModel{
         }
     }
     private void getSiteProductsFromDB(){
-        String query = "SELECT ps.productID, ps.quantity, p.pname, p.price\r\n" + //
+        siteProducts.clear();
+        String query = "SELECT ps.productID, ps.quantity, p.pname, p.price, p.punit \r\n" + //
                         "FROM ProductSites ps\r\n" + //
                         "JOIN Products p ON ps.productID = p.ID\r\n" + //
                         "WHERE ps.siteID = ?;\r\n" + //
@@ -65,10 +67,11 @@ public class SiteHomePageModel{
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()){
                     ProductSite pSite = new ProductSite();
-                    pSite.setProductID(resultSet.getInt("productID"));
+                    pSite.setProductId(resultSet.getInt("productID"));
                     pSite.setName(resultSet.getString("pname"));
                     pSite.setPrice(resultSet.getInt("price"));
                     pSite.setQuantity(resultSet.getInt("quantity"));
+                    pSite.setUnit(resultSet.getString("punit"));
                     siteProducts.add(pSite);
                 }
             }
