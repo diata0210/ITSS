@@ -28,8 +28,8 @@ import java.util.ResourceBundle;
 
 public class OrderToSiteController implements Initializable {
 
-    OrderToSiteRepository siteOrderRepository = new OrderToSiteRepositoryImp();
-    OrderToSiteServiceImp siteOrderServiceImp = new OrderToSiteServiceImp();
+    private OrderToSiteRepository siteOrderRepository = new OrderToSiteRepositoryImp();
+    private OrderToSiteServiceImp siteOrderServiceImp = new OrderToSiteServiceImp();
 
     private ObservableList<SiteOrder> siteOrders;
     private FilteredList<SiteOrder> filteredOrders;

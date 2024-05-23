@@ -1,47 +1,69 @@
 package app.repositories.implement;
 
+import app.db.DatabaseConnection;
 import app.repositories.SiteRepository;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 public class SiteRepositoryImpTest {
 
     private SiteRepository siteRepository = new SiteRepositoryImp();
 
-    //    Với các điều kiện để update thành công
     @Test
     void testUpdateQuantityProductSite_Success() {
         int siteId = 1;
-        int productId = 1;
+        int productId = 2;
         int quantityToSubtract = 5;
 
-        // Giá trị ban đầu
         int initialQuantityBeforeUpdate = siteRepository.getQuantityInSite(siteId, productId);
-        // Giá trị mong muốn
         int expectedQuantity = initialQuantityBeforeUpdate - quantityToSubtract;
         siteRepository.updateQuantityProductSite(siteId, productId, quantityToSubtract);
 
-        // Giá trị thực tế
         int initialQuantityAfterUpdate = siteRepository.getQuantityInSite(siteId, productId);
-        assertEquals(initialQuantityBeforeUpdate, initialQuantityAfterUpdate + quantityToSubtract);
         assertEquals(expectedQuantity, initialQuantityAfterUpdate);
     }
-    //    Với các điều kiện để update thất bại
+
+    @Test
     void testUpdateQuantityProductSite_NonExistingSite() {
-        // Arrange
         int siteId = -1;
-        int productId = 1;
+        int productId = 2;
         int quantityToSubtract = 10;
 
-        // Act & Assert
-        try {
+        Exception exception = assertThrows(RuntimeException.class, () -> {
             siteRepository.updateQuantityProductSite(siteId, productId, quantityToSubtract);
-            // If no exception is thrown, fail the test
-            fail("Expected RuntimeException was not thrown");
-        } catch (RuntimeException e) {
-            // Assert
-            assertEquals("Non-existing site ID", e.getMessage());
-        }
+        });
+
+        assertEquals("Non-existing site ID", exception.getMessage());
+    }
+
+    @Test
+    void testUpdateQuantityProductSite_NonExistingProduct() {
+        int siteId = 1;
+        int productId = 999;
+        int quantityToSubtract = 10;
+
+        siteRepository.updateQuantityProductSite(siteId, productId, quantityToSubtract);
+
+        int quantityAfterUpdate = siteRepository.getQuantityInSite(siteId, productId);
+        assertEquals(0, quantityAfterUpdate);
+    }
+
+    @Test
+    void testUpdateQuantityProductSite_QuantityExceeds() {
+        int siteId = 1;
+        int productId = 1;
+        int quantityToSubtract = 1000;
+
+        int initialQuantityBeforeUpdate = siteRepository.getQuantityInSite(siteId, productId);
+
+        siteRepository.updateQuantityProductSite(siteId, productId, quantityToSubtract);
+
+        int initialQuantityAfterUpdate = siteRepository.getQuantityInSite(siteId, productId);
+        assertEquals(initialQuantityBeforeUpdate - quantityToSubtract, initialQuantityAfterUpdate);
     }
 }
