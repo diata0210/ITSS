@@ -20,8 +20,6 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-         SellOrderRepositoryImp sellOrder = new SellOrderRepositoryImp();
-         sellOrder.getById(4);
          
         launch();
     }
